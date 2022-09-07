@@ -7,7 +7,6 @@ import {
   InputProps as ChakraInputProps,
   InputGroup,
   Flex,
-  Text,
 } from "@chakra-ui/react";
 
 import { FieldError } from "react-hook-form";
