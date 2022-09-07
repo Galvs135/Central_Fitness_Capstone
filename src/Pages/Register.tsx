@@ -60,8 +60,7 @@ export const Register = () => {
 
   const submitSingUp = ({ name, email, password, genre }: SingUpType) => {
     let data = { name, email, password, genre };
-    // singUp({ name, email, password, genre });
-    console.log(data);
+    singUp(data);
   };
 
   return (
