@@ -1,10 +1,11 @@
 import { Box, Center, Flex, Heading, Text } from "@chakra-ui/react";
+import { theme } from "../Styles/theme";
 
 export const GraficRepresentation = () => {
   return (
     <Box
       w={["253px", "253px", "352px"]}
-      bg="#333"
+      bg={theme.colors.black}
       borderRadius="6"
       padding={["12px 18px", "16px 24px"]}
       mt="2"
@@ -21,7 +22,7 @@ export const GraficRepresentation = () => {
         <Box flex="1">
           <Flex alignItems="center" w="135px">
             <Heading
-              color="#F6B933"
+              color={theme.colors.secondary}
               flex="1"
               fontSize={["12px", "12px", "16px"]}
             >
@@ -33,7 +34,7 @@ export const GraficRepresentation = () => {
           </Flex>
           <Flex alignItems="center" w="135px">
             <Heading
-              color="#F6B933"
+              color={theme.colors.secondary}
               flex="1"
               fontSize={["12px", "12px", "16px"]}
             >
@@ -45,7 +46,7 @@ export const GraficRepresentation = () => {
           </Flex>
           <Flex alignItems="center" w="135px">
             <Heading
-              color="#F6B933"
+              color={theme.colors.secondary}
               flex="1"
               fontSize={["12px", "12px", "16px"]}
             >
@@ -57,7 +58,7 @@ export const GraficRepresentation = () => {
           </Flex>
           <Flex alignItems="center" w="135px">
             <Heading
-              color="#F6B933"
+              color={theme.colors.secondary}
               flex="1"
               fontSize={["12px", "12px", "16px"]}
             >
@@ -75,7 +76,7 @@ export const GraficRepresentation = () => {
           w={["55px", "55px", "70px"]}
           h={["55px", "55px", "70px"]}
           borderRadius="100%"
-          borderColor="#F6B933"
+          borderColor={theme.colors.primary}
         >
           <Text color="white" fontSize="12px">
             22.8%

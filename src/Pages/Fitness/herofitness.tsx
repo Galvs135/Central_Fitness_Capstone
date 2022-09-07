@@ -10,12 +10,13 @@ import {
 import { GraficRepresentation } from "../../Components/grafic";
 
 import ImageHeroFitness from "../../Imgs/heroFitness.png";
+import { theme } from "../../Styles/theme";
 
 export const HeroFitness = () => {
   return (
     <Flex flexDir={["column", "column", "column", "row"]} position="relative">
       <Box
-        bg="#F6B933"
+        bg={theme.colors.primary}
         w={["100%", "100%", "100%", "0%"]}
         h={["70%", "70%", "70%", "0%"]}
         position="absolute"
@@ -24,8 +25,8 @@ export const HeroFitness = () => {
       <Flex flexDir="column" margin="auto" mb="42px" zIndex="1">
         <Heading
           as="h1"
-          fontSize={["20px", "20px", "32px", "32px"]}
-          fontWeight="semibold"
+          fontSize={["22px", "22px", "32px", "32px"]}
+          fontWeight="extrabold"
           color="white"
           w={["326px", "326px", "524px", "524px"]}
         >
@@ -33,7 +34,7 @@ export const HeroFitness = () => {
         </Heading>
         <Text
           fontSize={["12px", "16px", "18px", "18px"]}
-          fontWeight="medium"
+          fontWeight="semibold"
           color="white"
           w={["285px", "325px", "425px"]}
           mt="2.5"
@@ -49,7 +50,9 @@ export const HeroFitness = () => {
           bg="#F6CB33"
           w={["152px", "152px", "252px"]}
           h={["45px", "45px", "60px"]}
-          color="white"
+          color="#fff"
+          fontSize="18px"
+          fontWeight="semibold"
           borderRadius="5px 5px 120px 5px"
           boxShadow="4px 4px 4px 0px #333"
           _hover={{ bg: "yellow.400" }}
@@ -70,7 +73,7 @@ export const HeroFitness = () => {
         />
 
         <Box
-          bg="#F6B933"
+          bg={theme.colors.primary}
           w={["0", "0", "0%", "100%"]}
           h={["0", "0", "0", "100%"]}
           position="absolute"
@@ -82,7 +85,7 @@ export const HeroFitness = () => {
             position: "absolute",
             top: "90px",
             left: "-550",
-            bg: "#272727",
+            bg: theme.colors.black,
             w: "200%",
             h: "50%",
             transform: "rotate(-40deg)",

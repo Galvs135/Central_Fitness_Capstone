@@ -1,13 +1,8 @@
-import { Box } from "@chakra-ui/react";
 import React from "react";
-import { HeroFitness } from "./Pages/Fitness/herofitness";
+import { Heading } from "@chakra-ui/react";
 
 function App() {
-  return (
-    <Box h="100vh" bg="#272727">
-      <HeroFitness />
-    </Box>
-  );
+  return <Heading as="h1">APPP</Heading>;
 }
 
 export default App;
