@@ -1,8 +1,12 @@
-import { Heading } from "@chakra-ui/react";
 import React from "react";
+import { Register } from "./Pages/Register";
 
 function App() {
-  return <Heading as="h1">APPP</Heading>;
+  return (
+    <>
+      <Register />
+    </>
+  );
 }
 
 export default App;

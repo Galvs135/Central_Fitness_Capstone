@@ -1,6 +1,6 @@
 import { useToast } from "@chakra-ui/react";
 import { createContext, useContext, ReactNode } from "react";
-import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { api } from "../Services";
 
 interface ContextProps {
@@ -30,22 +30,25 @@ const useAuth = () => {
 
 const AuthProvider = ({ children }: ChildrenProp) => {
   const toast = useToast();
+  const history = useHistory();
   const singUp = (data: SingUpCredentials) => {
     api
       .post("/register", data)
       .then((_) => {
         toast({
+          position: "top",
           title: "Conta criada.",
-          description: "conta criada com sucesso, faça o login.",
+          description: "sua conta foi criada com sucesso, faça o login.",
           status: "success",
           duration: 3000,
           isClosable: true,
         });
-        <Redirect to="/login" />;
+        history.push("/login");
       })
       .catch((_) => {
         toast({
-          title: "error ao criar conta, tente novamente.",
+          position: "top",
+          title: "Error ao criar conta, tente novamente.",
           description: "Tente um email diferente.",
           status: "error",
           duration: 3000,
