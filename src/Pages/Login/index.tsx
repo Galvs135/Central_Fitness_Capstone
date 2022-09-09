@@ -12,15 +12,15 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import { container, item } from "../Styles/animate";
-import login_img from "../Imgs/imageLogin.png";
-import logo_img from "../Imgs/logo.png";
+import { container, item } from "../../Styles/animate";
+import login_img from "../../Imgs/imageLogin.png";
+import logo_img from "../../Imgs/logo.png";
 import { Link as ReactRouterLink, useHistory } from "react-router-dom";
-import { Input } from "../Components/Input";
+import { Input } from "../../Components/Input";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useLogin } from "../Providers/Login";
+import { useLogin } from "../../Providers/Login";
 
 const signInSchema = yup.object().shape({
   email: yup.string().required("Email Obrigatorio").email("email inválido"),

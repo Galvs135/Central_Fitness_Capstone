@@ -72,7 +72,7 @@ const LoginProvider = ({ children }: ChildrenProp) => {
           duration: 3000,
           isClosable: true,
         });
-        history.push("/home");
+        history.push("/fitnessHome");
       })
       .catch((_) => {
         toast({
