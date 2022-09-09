@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { GraficRepresentation } from "./GraficRepresentation";
 
-import ImageHeroFitness from "../../Imgs/heroFitness.png";
+import ImageHeroFitness from "../Imgs/heroFitness.png";
 import { theme } from "../Styles/theme";
 
 export const HeroFitness = () => {
