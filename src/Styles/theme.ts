@@ -6,6 +6,7 @@ export const theme = extendTheme({
     primary: "#f6b933",
     secondary: "#f6cb33",
     third: "#e08700",
+    input: "#3D3522",
     black: "#292929",
     white: "#e3e4dc",
   },
