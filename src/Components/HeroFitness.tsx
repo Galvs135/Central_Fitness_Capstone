@@ -7,10 +7,10 @@ import {
   Image,
   Text,
 } from "@chakra-ui/react";
-import { GraficRepresentation } from "../../Components/grafic";
+import { GraficRepresentation } from "./GraficRepresentation";
 
-import ImageHeroFitness from "../../Imgs/heroFitness.png";
-import { theme } from "../../Styles/theme";
+import ImageHeroFitness from "../Imgs/heroFitness.png";
+import { theme } from "../Styles/theme";
 
 export const HeroFitness = () => {
   return (
@@ -30,7 +30,7 @@ export const HeroFitness = () => {
           color="white"
           w={["326px", "326px", "524px", "524px"]}
         >
-          Saiba qual é o seu Indice de massa muscular (IMC)
+          Saiba qual é o seu índice de massa muscular (IMC)
         </Heading>
         <Text
           fontSize={["12px", "16px", "18px", "18px"]}

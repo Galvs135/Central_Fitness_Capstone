@@ -1,6 +1,6 @@
 import { ComponentType } from "react";
 import {
-  Route as CommomRoute,
+  Route as CommonRoute,
   RouteProps as ReactRouteProps,
 } from "react-router-dom";
 
@@ -15,7 +15,7 @@ export const Route = ({
   ...rest
 }: RouteProps) => {
   return (
-    <CommomRoute
+    <CommonRoute
       {...rest}
       render={() => {
         return isPrivate ? "/" : <Component />;
