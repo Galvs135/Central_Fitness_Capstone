@@ -11,16 +11,16 @@ import {
   Select,
 } from "@chakra-ui/react";
 import { Link as ReactRouterLink } from "react-router-dom";
-import { Input } from "../Components/Input";
+import { Input } from "../../Components/Input";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import logo_img from "../Imgs/logo.png";
-import register_img from "../Imgs/register.png";
-import { useAuth } from "../Providers/AuthContext";
+import logo_img from "../../Imgs/logo.png";
+import register_img from "../../Imgs/register.png";
+import { useAuth } from "../../Providers/AuthContext";
 import { motion } from "framer-motion";
-import { container, item } from "../Styles/animate";
+import { container, item } from "../../Styles/animate";
 
 interface SingUpType {
   name: string;

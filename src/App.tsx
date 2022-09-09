@@ -1,9 +1,9 @@
-import { Register } from "./Pages/Register";
+import { RoutesApplication } from "./Routes";
 
 function App() {
   return (
     <>
-      <Register />
+      <RoutesApplication />
     </>
   );
 }
