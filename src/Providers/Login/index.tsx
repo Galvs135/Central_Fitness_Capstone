@@ -51,8 +51,8 @@ const LoginProvider = ({ children }: ChildrenProp) => {
   const toast = useToast();
   const history = useHistory();
   const [data, setData] = useState<LoginState>(() => {
-    const accessToken = localStorage.getItem("@Fitnes:accessToken");
-    const user = localStorage.getItem("@Fitnes:user");
+    const accessToken = localStorage.getItem("@Fitness:accessToken");
+    const user = localStorage.getItem("@Fitness:user");
 
     if (accessToken && user) {
       return { accessToken, user: JSON.parse(user) };
@@ -89,7 +89,7 @@ const LoginProvider = ({ children }: ChildrenProp) => {
     console.log(response.data);
 
     const { accessToken, user } = response.data;
-    localStorage.setItem("Fitnes:accessToken", accessToken);
+    localStorage.setItem("@Fitness:accessToken", accessToken);
     localStorage.setItem("@Fitness:user", JSON.stringify(user));
 
     setData({ accessToken, user });

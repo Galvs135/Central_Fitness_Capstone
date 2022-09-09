@@ -12,10 +12,10 @@ export const RoutesApplication = () => {
     <Switch>
       <Route component={Login} exact path="/" />
       <Route component={Register} path="/register" />
-      <Route component={FitnessHome} path="/fitnessHome" />
-      <Route component={Nutrition} path="/nutrition" />
-      <Route component={Training} exact path="/training" />
-      <Route component={Exercise} path="/training/:exerciseName" />
+      <Route component={FitnessHome} path="/fitnessHome" isPrivate />
+      <Route component={Nutrition} path="/nutrition" isPrivate />
+      <Route component={Training} exact path="/training" isPrivate />
+      <Route component={Exercise} path="/training/:exerciseName" isPrivate />
     </Switch>
   );
 };
