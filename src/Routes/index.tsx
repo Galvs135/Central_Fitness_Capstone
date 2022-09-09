@@ -13,7 +13,7 @@ export const RoutesApplication = () => {
       <Route component={Login} exact path="/" />
       <Route component={Register} path="/register" />
       <Route component={FitnessHome} path="/fitnessHome" />
-      <Route component={Nutrition} path="/nutriction" />
+      <Route component={Nutrition} path="/nutrition" />
       <Route component={Training} exact path="/training" />
       <Route component={Exercise} path="/training/:exerciseName" />
     </Switch>
