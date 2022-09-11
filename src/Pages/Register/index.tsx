@@ -18,7 +18,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import logo_img from "../../Imgs/logo.png";
 import register_img from "../../Imgs/register.png";
-import { useAuth } from "../../Providers/AuthContext";
+
 import { motion } from "framer-motion";
 import { container, item } from "../../Styles/animate";
 
@@ -59,8 +59,8 @@ export const Register = () => {
   });
 
   const submitSingUp = ({ name, email, password, genre }: SingUpType) => {
-    let data = { name, email, password, genre };
-    // singUp(data);
+    // let data = { name, email, password, genre };
+    // // singUp(data);
   };
 
   return (
