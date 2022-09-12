@@ -85,7 +85,6 @@ export const Login = () => {
             as={motion.img}
             variants={item}
           />
-
           <Flex
             w={["100%", "100%", "100%", "100%", "50%"]}
             alignItems="center"

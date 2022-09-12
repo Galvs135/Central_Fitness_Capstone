@@ -16,6 +16,13 @@ interface MuscleContextData {
   weight: number;
   height: number;
   Muscle: (id: string) => void;
+  MuscleAtt: (id: string, data: Muscledata) => void;
+  MuscleRegister: (id: string, data: Muscledata) => void;
+}
+
+interface Muscledata {
+  weight: number;
+  height: number;
 }
 
 const MuscleContext = createContext<MuscleContextData>({} as MuscleContextData);
@@ -28,6 +35,7 @@ const MuscleProvider = ({ children }: ChildrenProp) => {
   const [height, setHeight] = useState<number>(0);
 
   const Muscle = (id: string) => {
+    console.log(token);
     api
       .get(`/users/${id}/muscles`, {
         headers: {
@@ -36,13 +44,38 @@ const MuscleProvider = ({ children }: ChildrenProp) => {
       })
       .then((response) => {
         console.log(response);
-        setWeight(response.data[0].weight);
-        setHeight(response.data[0].height);
-      });
+        setWeight(
+          response.data[0].weight === undefined ? 0 : response.data[0].weight
+        );
+        setHeight(
+          response.data[0].height === undefined ? 0 : response.data[0].height
+        );
+      })
+      .catch((response) => console.log(response));
+  };
+
+  const MuscleAtt = (id: string, data: Muscledata) => {
+    console.log(id);
+    api.patch(`/muscles/${id}/`, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  };
+
+  const MuscleRegister = (id: string, data: Muscledata) => {
+    console.log(id);
+    api.post(`/muscles/${id}/`, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   };
 
   return (
-    <MuscleContext.Provider value={{ Muscle, weight, height }}>
+    <MuscleContext.Provider
+      value={{ Muscle, MuscleAtt, MuscleRegister, weight, height }}
+    >
       {children}
     </MuscleContext.Provider>
   );
