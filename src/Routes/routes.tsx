@@ -1,5 +1,7 @@
+import { useLogin } from "../Providers/Login";
 import { ComponentType } from "react";
 import {
+  Redirect,
   Route as CommonRoute,
   RouteProps as ReactRouteProps,
 } from "react-router-dom";
@@ -14,11 +16,18 @@ export const Route = ({
   component: Component,
   ...rest
 }: RouteProps) => {
+  const { accessToken } = useLogin();
+
+  console.log(accessToken);
   return (
     <CommonRoute
       {...rest}
       render={() => {
-        return isPrivate ? "/" : <Component />;
+        return !!isPrivate === !!accessToken ? (
+          <Component />
+        ) : (
+          <Redirect to={isPrivate ? "/" : "/fitnessHome"} />
+        );
       }}
     />
   );

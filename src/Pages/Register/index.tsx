@@ -21,6 +21,7 @@ import register_img from "../../Imgs/register.png";
 
 import { motion } from "framer-motion";
 import { container, item } from "../../Styles/animate";
+import { useAuth } from "../../Providers/AuthContext";
 
 interface SingUpType {
   name: string;
@@ -31,7 +32,7 @@ interface SingUpType {
 }
 
 export const Register = () => {
-  //const { singUp } = useAuth();
+  const { singUp } = useAuth();
 
   const schema = yup.object().shape({
     name: yup.string().trim().required("Por favor digite seu nome"),
@@ -59,8 +60,8 @@ export const Register = () => {
   });
 
   const submitSingUp = ({ name, email, password, genre }: SingUpType) => {
-    // let data = { name, email, password, genre };
-    // // singUp(data);
+    let data = { name, email, password, genre };
+    singUp(data);
   };
 
   return (

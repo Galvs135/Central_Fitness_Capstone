@@ -53,7 +53,7 @@ const AuthProvider = ({ children }: ChildrenProp) => {
           duration: 3000,
           isClosable: true,
         });
-        history.push("/login");
+        history.push("/");
       })
       .catch((_) => {
         toast({
