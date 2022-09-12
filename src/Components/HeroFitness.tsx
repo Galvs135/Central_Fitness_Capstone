@@ -11,6 +11,7 @@ import { GraficRepresentation } from "./GraficRepresentation";
 
 import ImageHeroFitness from "../Imgs/heroFitness.png";
 import { theme } from "../Styles/theme";
+import { EditPerfil } from "./editPerfil";
 
 export const HeroFitness = () => {
   return (
@@ -42,6 +43,7 @@ export const HeroFitness = () => {
         >
           Saiba qual é o seu índice de massa muscular (IMC)
         </Heading>
+        <EditPerfil />
         <Text
           fontSize={["12px", "16px", "18px", "18px"]}
           fontWeight="semibold"
