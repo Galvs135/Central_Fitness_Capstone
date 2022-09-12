@@ -3,7 +3,7 @@ import { Exercise } from "../Pages/Exercise";
 import { FitnessHome } from "../Pages/Fitness";
 import { Login } from "../Pages/Login";
 import { Nutrition } from "../Pages/Nutrition";
-import { Register } from "../Pages/Register/Register";
+import { Register } from "../Pages/Register";
 import { Training } from "../Pages/Training";
 import { Route } from "./routes";
 

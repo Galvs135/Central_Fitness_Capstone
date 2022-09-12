@@ -1,7 +1,8 @@
 import { useToast } from "@chakra-ui/react";
-import { createContext, useContext, ReactNode } from "react";
+import { createContext, useContext, ReactNode, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { api } from "../Services";
+import { useLogin } from "./Login";
 
 interface ContextProps {
   singUp: (data: SingUpCredentials) => void;
@@ -14,6 +15,11 @@ interface ChildrenProp {
 interface SingUpCredentials {
   email: string;
   password: string;
+  name: string;
+  genre: string;
+}
+
+interface Atualization {
   name: string;
   genre: string;
 }
@@ -31,6 +37,10 @@ const useAuth = () => {
 const AuthProvider = ({ children }: ChildrenProp) => {
   const toast = useToast();
   const history = useHistory();
+  const [token, setToken] = useState(
+    localStorage.getItem("Fitnes:accessToken") || ""
+  );
+  const { user } = useLogin();
   const singUp = (data: SingUpCredentials) => {
     api
       .post("/register", data)
