@@ -16,6 +16,7 @@ import { EditPerfil } from "./editPerfil";
 export const HeroFitness = () => {
   return (
     <Flex
+      as="section"
       flexDir={["column", "column", "column", "row"]}
       position="relative"
       minH="100vh"

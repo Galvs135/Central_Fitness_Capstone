@@ -1,17 +1,17 @@
 import { useToast } from "@chakra-ui/react";
-import { createContext, useContext, ReactNode, useState } from "react";
+import { createContext, useContext, ReactNode } from "react";
 import { api } from "../../Services/api";
-import { useLogin } from "../Login";
+import { useAuth } from "../AuthContext";
 
 interface ContextProps {
-  AInformation: (data: Atualization) => void;
+  AInformation: (data: Actualization) => void;
 }
 
 interface ChildrenProp {
   children: ReactNode;
 }
 
-interface Atualization {
+interface Actualization {
   name: string;
   genre: string;
 }
@@ -28,16 +28,13 @@ const useUser = () => {
 
 const AuthProvider = ({ children }: ChildrenProp) => {
   const toast = useToast();
-  const [token, setToken] = useState(
-    localStorage.getItem("Fitnes:accessToken") || ""
-  );
-  const { user } = useLogin();
+  const { user, accessToken } = useAuth();
 
-  const AInformation = (data: Atualization) => {
+  const AInformation = (data: Actualization) => {
     api
       .patch(`/users/${user.id}`, data, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       })
       .then((_) => {
