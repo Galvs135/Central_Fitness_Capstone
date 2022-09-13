@@ -51,8 +51,8 @@ const LoginProvider = ({ children }: ChildrenProp) => {
   const toast = useToast();
   const history = useHistory();
   const [data, setData] = useState<LoginState>(() => {
-    const accessToken = localStorage.getItem("@Fitnes:accessToken");
-    const user = localStorage.getItem("@Fitnes:user");
+    const accessToken = localStorage.getItem("@Fitness:accessToken");
+    const user = localStorage.getItem("@Fitness:user");
 
     if (accessToken && user) {
       return { accessToken, user: JSON.parse(user) };
@@ -63,7 +63,13 @@ const LoginProvider = ({ children }: ChildrenProp) => {
   const signIn = useCallback(async ({ email, password }: SignInCredentials) => {
     api
       .post("/signin", { email, password })
-      .then((_) => {
+      .then((response) => {
+        const { accessToken, user } = response.data;
+        localStorage.setItem("@Fitness:accessToken", accessToken);
+        localStorage.setItem("@Fitness:user", JSON.stringify(user));
+        console.log(accessToken);
+        setData({ accessToken, user });
+
         toast({
           position: "top",
           title: "login realizado.",
@@ -84,16 +90,7 @@ const LoginProvider = ({ children }: ChildrenProp) => {
           isClosable: true,
         });
       });
-
-    const response = await api.post("/signin", { email, password });
-    console.log(response.data);
-
-    const { accessToken, user } = response.data;
-    localStorage.setItem("Fitnes:accessToken", accessToken);
-    localStorage.setItem("@Fitness:user", JSON.stringify(user));
-
-    setData({ accessToken, user });
-    console.log(accessToken);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -1,11 +1,19 @@
 import { useToast } from "@chakra-ui/react";
-import { createContext, useContext, ReactNode, useState } from "react";
+import {
+  createContext,
+  useContext,
+  ReactNode,
+  useState,
+  useCallback,
+} from "react";
 import { useHistory } from "react-router-dom";
 import { api } from "../Services";
-import { useLogin } from "./Login";
 
 interface ContextProps {
   singUp: (data: SingUpCredentials) => void;
+  user: User;
+  accessToken: string;
+  signIn: (credentials: SignInCredentials) => Promise<void>;
 }
 
 interface ChildrenProp {
@@ -18,10 +26,21 @@ interface SingUpCredentials {
   name: string;
   genre: string;
 }
-
-interface Atualization {
+interface SignInCredentials {
+  email: string;
+  password: string;
+}
+interface User {
+  email: string;
+  password: string;
+  id: string;
   name: string;
   genre: string;
+}
+
+interface LoginState {
+  accessToken: string;
+  user: User;
 }
 
 const AuthContext = createContext<ContextProps>({} as ContextProps);
@@ -37,10 +56,49 @@ const useAuth = () => {
 const AuthProvider = ({ children }: ChildrenProp) => {
   const toast = useToast();
   const history = useHistory();
-  const [token, setToken] = useState(
-    localStorage.getItem("Fitnes:accessToken") || ""
-  );
-  const { user } = useLogin();
+  const [data, setData] = useState<LoginState>(() => {
+    const accessToken = localStorage.getItem("@Fitness:accessToken");
+    const user = localStorage.getItem("@Fitness:user");
+
+    if (accessToken && user) {
+      return { accessToken, user: JSON.parse(user) };
+    }
+    return {} as LoginState;
+  });
+
+  const signIn = useCallback(async ({ email, password }: SignInCredentials) => {
+    api
+      .post("/signin", { email, password })
+      .then((response) => {
+        const { accessToken, user } = response.data;
+        localStorage.setItem("@Fitness:accessToken", accessToken);
+        localStorage.setItem("@Fitness:user", JSON.stringify(user));
+        console.log(accessToken);
+        setData({ accessToken, user });
+
+        toast({
+          position: "top",
+          title: "login realizado.",
+          description: "Login Realizado com sucesso",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+        history.push("/fitnessHome");
+      })
+      .catch((_) => {
+        toast({
+          position: "top",
+          title: "Usuário ou senha não existente",
+          description: "Usuário ou senha inválidos",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const singUp = (data: SingUpCredentials) => {
     api
       .post("/register", data)
@@ -53,7 +111,7 @@ const AuthProvider = ({ children }: ChildrenProp) => {
           duration: 3000,
           isClosable: true,
         });
-        history.push("/login");
+        history.push("/");
       })
       .catch((_) => {
         toast({
@@ -68,7 +126,11 @@ const AuthProvider = ({ children }: ChildrenProp) => {
   };
 
   return (
-    <AuthContext.Provider value={{ singUp }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider
+      value={{ singUp, signIn, accessToken: data.accessToken, user: data.user }}
+    >
+      {children}
+    </AuthContext.Provider>
   );
 };
 

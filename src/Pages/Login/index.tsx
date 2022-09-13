@@ -1,21 +1,18 @@
 import {
-  background,
   Box,
   Button,
   Container,
   Flex,
-  FormLabel,
   Grid,
   Heading,
   Image,
-  Link,
   Text,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { container, item } from "../../Styles/animate";
 import login_img from "../../Imgs/imageLogin.png";
 import logo_img from "../../Imgs/logo.png";
-import { Link as ReactRouterLink, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Input } from "../../Components/Input";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
@@ -23,8 +20,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useLogin } from "../../Providers/Login";
 
 const signInSchema = yup.object().shape({
-  email: yup.string().required("Email Obrigatorio").email("email inválido"),
-  password: yup.string().required("senha Obrigatória"),
+  email: yup.string().required("Email obrigatória").email("email inválido"),
+  password: yup.string().required("Senha obrigatória"),
 });
 
 interface SignInData {
@@ -63,9 +60,9 @@ export const Login = () => {
       minH="100vh"
       bg="#141414"
       bgImage={["none", "none", "none", login_img, login_img]}
-      bgPosition="65vh 1vh"
+      bgPosition="right bottom"
       bgRepeat="no-repeat"
-      bgSize="contain"
+      bgSize="85vh"
       overflow="hidden"
     >
       <Container maxW="container.xl" h="100vh">
@@ -84,11 +81,13 @@ export const Login = () => {
             h={["75px", "90px", "85px", "80px"]}
             as={motion.img}
             variants={item}
+            alignSelf={["center", "center", "center", "flex-start"]}
+            mb={["40px", "40px", "40px", "0", "0"]}
           />
           <Flex
             w={["100%", "100%", "100%", "100%", "50%"]}
             alignItems="center"
-            justifyContent="center"
+            justifyContent={["center", "center", "center", "initial"]}
           >
             <Box
               as={motion.form}
@@ -115,16 +114,14 @@ export const Login = () => {
               </Flex>
               <Grid gap={2}>
                 <Input
-                  label="Email"
+                  label="Email*"
                   type="email"
-                  placeholder="Digite o seu Email"
                   {...register("email")}
                   error={errors.email}
                   variants={item}
                 />
                 <Input
-                  label="Senha"
-                  placeholder="Digite a sua Senha"
+                  label="Senha*"
                   type="password"
                   {...register("password")}
                   error={errors.password}
@@ -157,13 +154,14 @@ export const Login = () => {
                 </Box>
                 <Box>
                   <Text
-                    fontSize="11px"
+                    fontSize="12px"
                     textAlign="center"
-                    w="95%"
+                    fontFamily="text"
+                    w="100%"
                     justifyContent="center"
                   >
-                    Ainda não possui uma conta? Começe agora mesmo a planejar
-                    seus exercicios e ficar por dentro de uma vida saudavel
+                    Ainda não possui uma conta? Comece agora mesmo a planejar
+                    seus exercícios e ficar por dentro de uma vida saudável
                   </Text>
                   <Box pt={6}>
                     <Button

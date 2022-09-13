@@ -15,7 +15,12 @@ import { ImcCalculator } from "./ImcCalculator";
 
 export const HeroFitness = () => {
   return (
-    <Flex flexDir={["column", "column", "column", "row"]} position="relative">
+    <Flex
+      as="section"
+      flexDir={["column", "column", "column", "row"]}
+      position="relative"
+      minH="100vh"
+    >
       <Box
         bg={theme.colors.primary}
         w={["100%", "100%", "100%", "0%"]}
@@ -23,7 +28,13 @@ export const HeroFitness = () => {
         position="absolute"
         flex="1"
       ></Box>
-      <Flex flexDir="column" margin="auto" mb="42px" zIndex="1">
+      <Flex
+        flexDir="column"
+        margin="auto"
+        zIndex="1"
+        alignContent="center"
+        h="100%"
+      >
         <Heading
           as="h1"
           fontSize={["22px", "22px", "32px", "32px"]}

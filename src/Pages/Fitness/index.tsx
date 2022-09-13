@@ -1,10 +1,11 @@
 import { HeroFitness } from "../../Components/HeroFitness";
+import { Planning } from "../../Components/Planning";
 
 export const FitnessHome = () => {
-  // Pagina criada para renderizar componente nas rotas
   return (
     <>
       <HeroFitness />
+      <Planning />
     </>
   );
 };
