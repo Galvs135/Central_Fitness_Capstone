@@ -1,12 +1,7 @@
-import {
-  createContext,
-  useContext,
-  ReactNode,
-  useState,
-  useCallback,
-} from "react";
-import { useHistory } from "react-router-dom";
-import { api } from "../../Services";
+import { createContext, ReactNode, useState } from "react";
+
+import { api } from "../../Services/api";
+import { useAuth } from "../AuthContext";
 
 interface ChildrenProp {
   children: ReactNode;
@@ -34,6 +29,13 @@ interface MuscleContextData {
   Muscle: (id: string) => void;
   listTrainigs: Training[];
   loadTraining(token: string, user: User): void;
+  MuscleAtt: (id: string, data: Muscledata) => void;
+  MuscleRegister: (id: string, data: Muscledata) => void;
+}
+
+interface Muscledata {
+  weight: number;
+  height: number;
 }
 
 const MuscleContext = createContext<MuscleContextData>({} as MuscleContextData);
@@ -42,22 +44,45 @@ const MuscleProvider = ({ children }: ChildrenProp) => {
   const [token, setToken] = useState(
     localStorage.getItem("@Fitness:accessToken") || ""
   );
+
+  const { accessToken } = useAuth();
   const [weight, setWeight] = useState<number>(0);
   const [height, setHeight] = useState<number>(0);
   const [listTrainigs, setListTrainings] = useState<Training[]>([]);
 
   const Muscle = (id: string) => {
-    api
-      .get(`/users/${id}/muscles`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        console.log(response);
-        setWeight(response.data[0].weight);
-        setHeight(response.data[0].height);
-      });
+    if (id) {
+      api
+        .get(`/users/${id}/muscles`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .then((response) => {
+          console.log(response);
+          setWeight(response.data[0].weight);
+          setHeight(response.data[0].height);
+        })
+        .catch((response) => console.log(response));
+    }
+  };
+
+  const MuscleAtt = (id: string, data: Muscledata) => {
+    console.log(id);
+    api.patch(`/muscles/${id}/`, data, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+  };
+
+  const MuscleRegister = (id: string, data: Muscledata) => {
+    console.log(id);
+    api.post(`/muscles/${id}/`, data, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
   };
 
   const loadTraining = (token: string, user: User) => {
@@ -84,7 +109,15 @@ const MuscleProvider = ({ children }: ChildrenProp) => {
 
   return (
     <MuscleContext.Provider
-      value={{ Muscle, weight, height, listTrainigs, loadTraining }}
+      value={{
+        Muscle,
+        MuscleAtt,
+        MuscleRegister,
+        weight,
+        height,
+        loadTraining,
+        listTrainigs,
+      }}
     >
       {children}
     </MuscleContext.Provider>

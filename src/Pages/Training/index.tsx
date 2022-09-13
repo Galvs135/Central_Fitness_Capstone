@@ -7,12 +7,11 @@ import TrainingImage from "../../Imgs/training.png";
 import { theme } from "../../Styles/theme";
 import { useLogin } from "../../Providers/Login";
 import { useEffect } from "react";
+import { useAuth } from "../../Providers/AuthContext";
 
 export const Training = () => {
   const { listTrainigs, loadTraining } = useContext(MuscleContext);
-  const { accessToken, user } = useLogin();
-
-  console.log(user);
+  const { accessToken, user } = useAuth();
 
   useEffect(() => {
     if (accessToken) {

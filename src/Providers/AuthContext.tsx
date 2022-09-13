@@ -7,7 +7,7 @@ import {
   useCallback,
 } from "react";
 import { useHistory } from "react-router-dom";
-import { api } from "../Services";
+import { api } from "../Services/api";
 
 interface ContextProps {
   singUp: (data: SingUpCredentials) => void;
@@ -102,7 +102,7 @@ const AuthProvider = ({ children }: ChildrenProp) => {
   const singUp = (data: SingUpCredentials) => {
     api
       .post("/register", data)
-      .then((_) => {
+      .then(({ data }) => {
         toast({
           position: "top",
           title: "Conta criada.",
@@ -111,6 +111,15 @@ const AuthProvider = ({ children }: ChildrenProp) => {
           duration: 3000,
           isClosable: true,
         });
+        api.post(
+          `/muscles`,
+          { weight: 0, height: 0, userId: data.user.id },
+          {
+            headers: {
+              Authorization: `Bearer ${data.accessToken}`,
+            },
+          }
+        );
         history.push("/");
       })
       .catch((_) => {

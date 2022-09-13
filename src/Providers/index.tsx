@@ -12,11 +12,11 @@ interface ChildrenProp {
 export const AppProvider = ({ children }: ChildrenProp) => {
   return (
     <ChakraProvider theme={theme}>
-      <LoginProvider>
-        <MuscleProvider>
-          <AuthProvider>{children}</AuthProvider>
-        </MuscleProvider>
-      </LoginProvider>
+      <AuthProvider>
+        {/* <LoginProvider> */}
+        <MuscleProvider>{children}</MuscleProvider>
+        {/* </LoginProvider> */}
+      </AuthProvider>
     </ChakraProvider>
   );
 };
