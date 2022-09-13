@@ -9,16 +9,12 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
-  Heading,
-  Flex,
-  FormControl,
-  FormLabel,
   ModalFooter,
   Input,
   Text,
 } from "@chakra-ui/react";
 import { FiCheck, FiX } from "react-icons/fi";
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { useLogin } from "../Providers/Login";
 import { MuscleContext } from "../Providers/Muscle";
 import { useUser } from "../Providers/user";
@@ -39,7 +35,7 @@ export const EditPerfil = () => {
   const handleClickEdit = () => {
     setEdit(true);
   };
-  const Atualization = () => {
+  const Actualization = () => {
     AInformation({ name: name, genre: genre });
   };
 
@@ -111,7 +107,7 @@ export const EditPerfil = () => {
             {edit === true ? (
               <>
                 <Button
-                  onClick={() => Atualization()}
+                  onClick={() => Actualization()}
                   background={theme.colors.primary}
                   color={theme.colors.black}
                 >
