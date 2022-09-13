@@ -11,7 +11,7 @@ import { GraficRepresentation } from "./GraficRepresentation";
 
 import ImageHeroFitness from "../Imgs/heroFitness.png";
 import { theme } from "../Styles/theme";
-import { EditPerfil } from "./editPerfil";
+import { EditPerfil } from "./EditPerfil";
 
 export const HeroFitness = () => {
   return (
