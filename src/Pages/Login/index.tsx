@@ -17,7 +17,7 @@ import { Input } from "../../Components/Input";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useLogin } from "../../Providers/Login";
+import { useAuth } from "../../Providers/AuthContext";
 
 const signInSchema = yup.object().shape({
   email: yup.string().required("Email obrigatória").email("email inválido"),
@@ -30,7 +30,7 @@ interface SignInData {
 }
 
 export const Login = () => {
-  const { signIn } = useLogin();
+  const { signIn } = useAuth();
   const history = useHistory();
 
   const {

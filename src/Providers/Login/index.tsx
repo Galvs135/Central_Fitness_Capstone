@@ -7,7 +7,7 @@ import {
   useCallback,
 } from "react";
 import { useHistory } from "react-router-dom";
-import { api } from "../../Services";
+import { api } from "../../Services/api";
 
 interface ChildrenProp {
   children: ReactNode;

@@ -16,7 +16,7 @@ import {
   Input,
   Text,
 } from "@chakra-ui/react";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useAuth } from "../Providers/AuthContext";
 import { api } from "../Services/api";
 import { MuscleContext } from "../Providers/Muscle";
@@ -26,28 +26,32 @@ export const ImcCalculator = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { Muscle, MuscleAtt, MuscleRegister, weight, height } =
     useContext(MuscleContext);
-  const [weightV, setWeight] = useState(weight);
-  const [heightV, setHeight] = useState(height);
+  const [weightV, setWeight] = useState(0);
+  const [heightV, setHeight] = useState(0);
   const [imc, setImc] = useState<number>(0);
-  const { user } = useLogin();
+  const { user } = useAuth();
 
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
+
+  useEffect(() => {
+    setHeight(height);
+    setWeight(weight);
+  }, [weight, height]);
 
   const handleCloseClick = () => {
     onClose();
   };
 
   const calculate = () => {
-    setImc(weight / (height * height));
+    setImc(weightV / (heightV * heightV));
   };
-  console.log(user);
 
   return (
     <>
       <Button
         onClick={() => {
-          Muscle(user.id);
+          Muscle(user?.id);
           onOpen();
         }}
         mt="5"
@@ -89,9 +93,10 @@ export const ImcCalculator = () => {
               {user ? (
                 <Input
                   type="number"
+                  step="3"
                   ref={initialRef}
                   value={weightV}
-                  onChange={(e) => setWeight(Number(e.target.value))}
+                  onChange={(e) => setWeight(parseFloat(e.target.value))}
                   background={theme.colors.input}
                 />
               ) : (
@@ -151,6 +156,8 @@ export const ImcCalculator = () => {
                 background={theme.colors.primary}
                 fontFamily={theme.fonts.title}
                 color={theme.colors.white}
+                _hover={{ background: theme.colors.primary }}
+                _active={{ background: theme.colors.primary }}
                 mr={3}
                 onClick={() => {
                   calculate();

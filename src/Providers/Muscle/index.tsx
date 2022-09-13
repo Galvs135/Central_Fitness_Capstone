@@ -1,12 +1,7 @@
-import {
-  createContext,
-  useContext,
-  ReactNode,
-  useState,
-  useCallback,
-} from "react";
-import { useHistory } from "react-router-dom";
-import { api } from "../../Services";
+import { createContext, ReactNode, useState } from "react";
+
+import { api } from "../../Services/api";
+import { useAuth } from "../AuthContext";
 
 interface ChildrenProp {
   children: ReactNode;
@@ -28,37 +23,32 @@ interface Muscledata {
 const MuscleContext = createContext<MuscleContextData>({} as MuscleContextData);
 
 const MuscleProvider = ({ children }: ChildrenProp) => {
-  const [token, setToken] = useState(
-    localStorage.getItem("Fitnes:accessToken") || ""
-  );
+  const { accessToken } = useAuth();
   const [weight, setWeight] = useState<number>(0);
   const [height, setHeight] = useState<number>(0);
 
   const Muscle = (id: string) => {
-    console.log(token);
-    api
-      .get(`/users/${id}/muscles`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        console.log(response);
-        setWeight(
-          response.data[0].weight === undefined ? 0 : response.data[0].weight
-        );
-        setHeight(
-          response.data[0].height === undefined ? 0 : response.data[0].height
-        );
-      })
-      .catch((response) => console.log(response));
+    if (id) {
+      api
+        .get(`/users/${id}/muscles`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .then((response) => {
+          console.log(response);
+          setWeight(response.data[0].weight);
+          setHeight(response.data[0].height);
+        })
+        .catch((response) => console.log(response));
+    }
   };
 
   const MuscleAtt = (id: string, data: Muscledata) => {
     console.log(id);
     api.patch(`/muscles/${id}/`, data, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${accessToken}`,
       },
     });
   };
@@ -67,7 +57,7 @@ const MuscleProvider = ({ children }: ChildrenProp) => {
     console.log(id);
     api.post(`/muscles/${id}/`, data, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${accessToken}`,
       },
     });
   };
