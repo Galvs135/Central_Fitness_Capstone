@@ -11,7 +11,7 @@ import { GraficRepresentation } from "./GraficRepresentation";
 
 import ImageHeroFitness from "../Imgs/heroFitness.png";
 import { theme } from "../Styles/theme";
-import { EditPerfil } from "./EditPerfil";
+import { ImcCalculator } from "./ImcCalculator";
 
 export const HeroFitness = () => {
   return (
@@ -44,7 +44,6 @@ export const HeroFitness = () => {
         >
           Saiba qual é o seu índice de massa muscular (IMC)
         </Heading>
-        <EditPerfil />
         <Text
           fontSize={["12px", "16px", "18px", "18px"]}
           fontWeight="semibold"
@@ -58,7 +57,7 @@ export const HeroFitness = () => {
 
         <GraficRepresentation />
 
-        <Button
+        {/* <Button
           mt="5"
           bg="#F6CB33"
           w={["152px", "152px", "252px"]}
@@ -69,9 +68,9 @@ export const HeroFitness = () => {
           borderRadius="5px 5px 120px 5px"
           boxShadow="4px 4px 4px 0px #333"
           _hover={{ bg: "yellow.400" }}
-        >
-          Calcular IMC
-        </Button>
+        > */}
+        <ImcCalculator />
+        {/* </Button> */}
       </Flex>
 
       <Center
