@@ -14,12 +14,14 @@ export const HeroFitness = () => {
       flexDir={["column", "column", "column", "row"]}
       justifyContent="flex-start"
       position="relative"
+      pt="42px"
     >
       <Box
         bg={theme.colors.primary}
         w={["100%", "100%", "100%", "0%"]}
         h={["70%", "70%", "70%", "0%"]}
         position="absolute"
+        top="0"
         flex="1"
       ></Box>
       <Flex
