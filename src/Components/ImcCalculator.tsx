@@ -57,9 +57,9 @@ export const ImcCalculator = () => {
         mt="5"
         bg="#F6CB33"
         w={["152px", "152px", "252px"]}
-        h={["45px", "45px", "60px"]}
+        h={["45px", "45px", "65px"]}
         color="#fff"
-        fontSize="18px"
+        fontSize="16px"
         fontWeight="semibold"
         borderRadius="5px 5px 120px 5px"
         boxShadow="4px 4px 4px 0px #333"
