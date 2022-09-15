@@ -73,7 +73,6 @@ const AuthProvider = ({ children }: ChildrenProp) => {
         const { accessToken, user } = response.data;
         localStorage.setItem("@Fitness:accessToken", accessToken);
         localStorage.setItem("@Fitness:user", JSON.stringify(user));
-        console.log(accessToken);
         setData({ accessToken, user });
 
         toast({

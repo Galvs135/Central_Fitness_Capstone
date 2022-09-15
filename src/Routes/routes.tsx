@@ -18,7 +18,6 @@ export const Route = ({
 }: RouteProps) => {
   const { accessToken } = useAuth();
 
-  console.log(accessToken);
   return (
     <CommonRoute
       {...rest}

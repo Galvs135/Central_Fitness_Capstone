@@ -17,7 +17,7 @@ import { FiCheck, FiX } from "react-icons/fi";
 import { useContext, useState } from "react";
 import { useLogin } from "../Providers/Login";
 import { MuscleContext } from "../Providers/Muscle";
-import { useUser } from "../Providers/user";
+import { useUser } from "../Providers/User";
 
 export const EditPerfil = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -38,8 +38,6 @@ export const EditPerfil = () => {
   const Actualization = () => {
     AInformation({ name: name, genre: genre });
   };
-
-  console.log(user);
 
   return (
     <>
