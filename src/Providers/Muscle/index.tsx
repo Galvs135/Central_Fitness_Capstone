@@ -45,7 +45,9 @@ const MuscleProvider = ({ children }: ChildrenProp) => {
     localStorage.getItem("@Fitness:accessToken") || ""
   );
 
+
   const { accessToken } = useAuth();
+
   const [weight, setWeight] = useState<number>(0);
   const [height, setHeight] = useState<number>(0);
   const [listTrainigs, setListTrainings] = useState<Training[]>([]);
@@ -59,7 +61,6 @@ const MuscleProvider = ({ children }: ChildrenProp) => {
           },
         })
         .then((response) => {
-          console.log(response);
           setWeight(response.data[0].weight);
           setHeight(response.data[0].height);
         })
@@ -77,7 +78,6 @@ const MuscleProvider = ({ children }: ChildrenProp) => {
   };
 
   const MuscleRegister = (id: string, data: Muscledata) => {
-    console.log(id);
     api.post(`/muscles/${id}/`, data, {
       headers: {
         Authorization: `Bearer ${accessToken}`,

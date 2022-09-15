@@ -42,7 +42,6 @@ export const Login = () => {
   });
 
   const handleSignIn = (data: SignInData) => {
-    console.log(data);
     signIn(data);
   };
 
