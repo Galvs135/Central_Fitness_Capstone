@@ -45,7 +45,9 @@ const MuscleProvider = ({ children }: ChildrenProp) => {
     localStorage.getItem("@Fitness:accessToken") || ""
   );
 
-  const { accessToken, user } = useAuth();
+
+  const { accessToken } = useAuth();
+
   const [weight, setWeight] = useState<number>(0);
   const [height, setHeight] = useState<number>(0);
   const [listTrainigs, setListTrainings] = useState<Training[]>([]);

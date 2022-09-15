@@ -5,7 +5,7 @@ export const GraficRepresentation = () => {
   return (
     <Box
       w={["253px", "253px", "352px"]}
-      bg={theme.colors.black}
+      bg="#212121"
       borderRadius="6"
       padding={["12px 18px", "16px 24px"]}
       mt="2"
