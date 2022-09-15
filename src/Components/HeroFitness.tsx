@@ -11,6 +11,7 @@ import { GraficRepresentation } from "./GraficRepresentation";
 
 import ImageHeroFitness from "../Imgs/heroFitness.png";
 import { theme } from "../Styles/theme";
+import { EditPerfil } from "./editPerfil";
 import { ImcCalculator } from "./ImcCalculator";
 
 export const HeroFitness = () => {
