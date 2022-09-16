@@ -17,8 +17,7 @@ import {
   Box,
 } from "@chakra-ui/react";
 import { FiCheck, FiX } from "react-icons/fi";
-import { useContext, useState } from "react";
-import { MuscleContext } from "../Providers/Muscl
+import { useState } from "react";
 import { useUser } from "../Providers/User";
 import { useAuth } from "../Providers/AuthContext";
 import { motion } from "framer-motion";
@@ -27,9 +26,9 @@ import { AiFillSetting } from "react-icons/ai";
 
 export const EditPerfil = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { user } = useAuth();
+  const { user, Muscle, weight, height } = useAuth();
   const { AInformation } = useUser();
-  const { Muscle, weight, height } = useContext(MuscleContext);
+
   const [edit, setEdit] = useState(false);
   const [name, setName] = useState(user.name);
   const [genre, setGenre] = useState(user.genre);
