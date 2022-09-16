@@ -3,6 +3,7 @@ import { GraficRepresentation } from "./GraficRepresentation";
 
 import { theme } from "../Styles/theme";
 import { EditPerfil } from "./EditPerfil";
+
 import { ImcCalculator } from "./ImcCalculator";
 
 import IntroductionFitness from "../Imgs/introduction-fitness.png";

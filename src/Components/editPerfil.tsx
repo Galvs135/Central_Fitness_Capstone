@@ -18,7 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { FiCheck, FiX } from "react-icons/fi";
 import { useContext, useState } from "react";
-import { MuscleContext } from "../Providers/Muscle";
+import { MuscleContext } from "../Providers/Muscl
 import { useUser } from "../Providers/User";
 import { useAuth } from "../Providers/AuthContext";
 import { motion } from "framer-motion";
