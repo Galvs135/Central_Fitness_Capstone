@@ -24,7 +24,7 @@ import { NavLink as RouterLink } from "react-router-dom";
 import bgMenu from "../Imgs/bg-menu.svg";
 import { motion } from "framer-motion";
 import { container, item, itemLeft } from "../Styles/animate";
-import { EditPerfil } from "./editPerfil";
+import { UpdatePerfil } from "./UpdatePerfil";
 
 export const Menu = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -177,7 +177,7 @@ export const Menu = () => {
                   initial="hidden"
                   animate="visible"
                 >
-                  <EditPerfil />
+                  <UpdatePerfil />
                   <ListItem as={motion.li} variants={itemLeft}>
                     <Link as={motion.button} sx={linkCss} onClick={logOut}>
                       <Box as="span" fontSize="1.5rem">

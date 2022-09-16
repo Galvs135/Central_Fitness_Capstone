@@ -24,7 +24,11 @@ import { motion } from "framer-motion";
 import { itemLeft } from "../Styles/animate";
 import { AiFillSetting } from "react-icons/ai";
 
-export const EditPerfil = () => {
+interface OnClose {
+  F: () => void;
+}
+
+export const UpdatePerfil = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { user, Muscle, weight, height } = useAuth();
   const { AInformation } = useUser();
@@ -42,8 +46,6 @@ export const EditPerfil = () => {
   const Actualization = () => {
     AInformation({ name: name, genre: genre });
   };
-
-  console.log(user);
 
   const linkCss = {
     rounded: 4,
@@ -90,13 +92,18 @@ export const EditPerfil = () => {
         </Link>
       </ListItem>
 
-      <Modal isOpen={isOpen} onClose={handleCloseClick} size="lg">
+      <Modal
+        isOpen={isOpen}
+        onClose={handleCloseClick}
+        size="lg"
+        blockScrollOnMount={false}
+      >
         <ModalOverlay />
-        <ModalContent background={theme.colors.black}>
+        <ModalContent background="black">
           <ModalHeader
-            fontFamily={theme.fonts.title}
-            color={theme.colors.white}
-            background={theme.colors.primary}
+            fontFamily="title"
+            color="white"
+            background="primary"
             borderTopLeftRadius="8px"
             borderTopRightRadius="8px"
             display="flex"

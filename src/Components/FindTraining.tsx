@@ -13,7 +13,7 @@ import { FieldError } from "react-hook-form";
 import { motion } from "framer-motion";
 
 interface InputProps extends ChakraInputProps {
-  label?: string;
+  label: string;
   error?: FieldError | null;
   variants?: {
     hidden: { y: number; opacity: number };
