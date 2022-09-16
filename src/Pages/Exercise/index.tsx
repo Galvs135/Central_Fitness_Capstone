@@ -3,7 +3,6 @@ import { Link as ReactRouterLink } from "react-router-dom";
 import { useEffect } from "react";
 import ReactPlayer from "react-player";
 import { useParams } from "react-router-dom";
-
 import { useAuth } from "../../Providers/AuthContext";
 
 interface Params {
