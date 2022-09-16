@@ -11,6 +11,7 @@ import { api } from "../Services/api";
 
 interface ContextProps {
   singUp: (data: SingUpCredentials) => void;
+  logOut: () => void;
   user: User;
   accessToken: string;
   signIn: (credentials: SignInCredentials) => Promise<void>;
@@ -73,6 +74,7 @@ const AuthProvider = ({ children }: ChildrenProp) => {
         const { accessToken, user } = response.data;
         localStorage.setItem("@Fitness:accessToken", accessToken);
         localStorage.setItem("@Fitness:user", JSON.stringify(user));
+        console.log(accessToken);
         setData({ accessToken, user });
 
         toast({
@@ -133,9 +135,21 @@ const AuthProvider = ({ children }: ChildrenProp) => {
       });
   };
 
+  const logOut = () => {
+    localStorage.clear();
+    setData({} as LoginState);
+    history.push("/");
+  };
+
   return (
     <AuthContext.Provider
-      value={{ singUp, signIn, accessToken: data.accessToken, user: data.user }}
+      value={{
+        singUp,
+        signIn,
+        logOut,
+        accessToken: data.accessToken,
+        user: data.user,
+      }}
     >
       {children}
     </AuthContext.Provider>
