@@ -1,15 +1,11 @@
-import { Box, Flex, Image } from "@chakra-ui/react";
-import { useContext } from "react";
+import { Flex, Image } from "@chakra-ui/react";
 import { CardTraining } from "../../Components/CardTraining";
-import { MuscleContext } from "../../Providers/Muscle";
 import TrainingImage from "../../Imgs/training.png";
-import { theme } from "../../Styles/theme";
-import { useLogin } from "../../Providers/Login";
 import { useEffect } from "react";
 import { useAuth } from "../../Providers/AuthContext";
 
 export const Training = () => {
-  const { listTrainigs, loadTraining } = useContext(MuscleContext);
+  const { listTrainigs, loadTraining } = useAuth();
   const { accessToken, user } = useAuth();
 
   useEffect(() => {
