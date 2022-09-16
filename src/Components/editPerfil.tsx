@@ -39,8 +39,6 @@ export const EditPerfil = () => {
     AInformation({ name: name, genre: genre });
   };
 
-  console.log(user);
-
   return (
     <>
       <Button

@@ -7,7 +7,7 @@ import {
   useCallback,
 } from "react";
 import { useHistory } from "react-router-dom";
-import { api } from "../../Services";
+import { api } from "../../Services/api";
 
 interface ChildrenProp {
   children: ReactNode;
@@ -67,7 +67,7 @@ const LoginProvider = ({ children }: ChildrenProp) => {
         const { accessToken, user } = response.data;
         localStorage.setItem("@Fitness:accessToken", accessToken);
         localStorage.setItem("@Fitness:user", JSON.stringify(user));
-        console.log(accessToken);
+
         setData({ accessToken, user });
 
         toast({
