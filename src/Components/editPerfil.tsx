@@ -16,8 +16,10 @@ import {
 import { FiCheck, FiX } from "react-icons/fi";
 import { useContext, useState } from "react";
 import { useLogin } from "../Providers/Login";
+
 import { useUser } from "../Providers/User";
 import { useAuth } from "../Providers/AuthContext";
+
 
 export const EditPerfil = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();

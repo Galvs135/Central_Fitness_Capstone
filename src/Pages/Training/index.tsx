@@ -14,6 +14,15 @@ export const Training = () => {
     }
   }, []);
 
+  //const cardData = {
+  //  id: 1,
+  //  title: "Café dos TOP",
+  //  category: "Manhã",
+  //  imageURL: "https://i.imgur.com/EXcGOYj.png",
+  //  ingredients: ["banana frita", "maçã", "pera"],
+  //  preparation: ["frite a banana e picote as frutas"],
+  //};
+
   return (
     <Flex position="relative" w="100%" m="auto">
       <Flex
