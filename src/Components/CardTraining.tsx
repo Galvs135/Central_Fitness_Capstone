@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Image } from "@chakra-ui/react";
+import { Flex, Heading, Image } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom";
 
 import AbdomenIcon from "../Imgs/abdomen_Icon.png";

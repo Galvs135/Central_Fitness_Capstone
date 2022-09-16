@@ -1,8 +1,7 @@
 import { Box, Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
 import { useState } from "react";
-import testImage from "../Imgs/Rectangle 62.png";
 import logoTalher from "../Imgs/talher.png";
-import { ModalRevenue } from "./ModalRevenue";
+import { ModalRevenue } from "./ModalRecipe";
 
 interface CardProps {
   data: {

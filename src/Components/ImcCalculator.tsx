@@ -13,17 +13,13 @@ import {
   ModalFooter,
   Input,
   Text,
-  FormErrorMessage,
-  InputRightAddon,
   InputGroup,
-  InputLeftElement,
-  InputLeftAddon,
   InputRightElement,
 } from "@chakra-ui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useAuth } from "../Providers/AuthContext";
 
 const signInSchema = yup.object().shape({
