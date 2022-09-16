@@ -20,6 +20,9 @@ interface ContextProps {
   listTrainigs: Training[];
   loadTraining(token: string, user: User): void;
   MuscleAtt: (id: string, data: Muscledata) => void;
+
+  logOut: () => void;
+
 }
 
 interface ChildrenProp {
@@ -210,6 +213,14 @@ const AuthProvider = ({ children }: ChildrenProp) => {
       });
   };
 
+
+  const logOut = () => {
+    localStorage.clear();
+    setData({} as LoginState);
+    history.push("/");
+  };
+
+
   return (
     <AuthContext.Provider
       value={{
@@ -223,6 +234,8 @@ const AuthProvider = ({ children }: ChildrenProp) => {
         height,
         loadTraining,
         listTrainigs,
+        logOut,
+
       }}
     >
       {children}
