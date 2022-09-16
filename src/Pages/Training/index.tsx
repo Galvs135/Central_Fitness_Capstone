@@ -1,15 +1,15 @@
-import { Box, Flex, Image } from "@chakra-ui/react";
-import { useContext } from "react";
-import { CardTraining } from "../../Components/CardTraining";
-import { MuscleContext } from "../../Providers/Muscle";
-import TrainingImage from "../../Imgs/training.png";
-import { theme } from "../../Styles/theme";
-import { useLogin } from "../../Providers/Login";
 import { useEffect } from "react";
+
+import { Flex, Image } from "@chakra-ui/react";
+import { CardTraining } from "../../Components/CardTraining";
+
 import { useAuth } from "../../Providers/AuthContext";
+import { useMuscle } from "../../Providers/Muscle";
+
+import TrainingImage from "../../Imgs/training.png";
 
 export const Training = () => {
-  const { listTrainigs, loadTraining } = useContext(MuscleContext);
+  const { listTrainigs, loadTraining } = useMuscle();
   const { accessToken, user } = useAuth();
 
   useEffect(() => {
@@ -17,15 +17,6 @@ export const Training = () => {
       loadTraining(accessToken, user);
     }
   }, []);
-
-  //const cardData = {
-  //  id: 1,
-  //  title: "Café dos TOP",
-  //  category: "Manhã",
-  //  imageURL: "https://i.imgur.com/EXcGOYj.png",
-  //  ingredients: ["banana frita", "maçã", "pera"],
-  //  preparation: ["frite a banana e picote as frutas"],
-  //};
 
   return (
     <Flex position="relative" w="100%" m="auto">

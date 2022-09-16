@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Image } from "@chakra-ui/react";
+import { Flex, Heading, Image } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom";
 
 import AbdomenIcon from "../Imgs/abdomen_Icon.png";
@@ -25,7 +25,7 @@ export const CardTraining = ({ training }: CardTrainingProps) => {
     if (category === "abdomen") {
       return AbdomenIcon;
     }
-    if (category === "pernas") {
+    if (category === "perna") {
       return LegIcon;
     }
     if (category === "peito") {
@@ -38,8 +38,8 @@ export const CardTraining = ({ training }: CardTrainingProps) => {
       return BackIcon;
     }
   };
-  const history = useHistory();
 
+  const history = useHistory();
   const goToExercise = (path: string) => {
     history.push(`/training/${path}`);
   };

@@ -14,16 +14,16 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { FiCheck, FiX } from "react-icons/fi";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useLogin } from "../Providers/Login";
-import { MuscleContext } from "../Providers/Muscle";
 import { useUser } from "../Providers/user";
+import { useMuscle } from "../Providers/Muscle";
 
 export const EditPerfil = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { user } = useLogin();
   const { AInformation } = useUser();
-  const { Muscle, weight, height } = useContext(MuscleContext);
+  const { Muscle, weight, height } = useMuscle();
   const [edit, setEdit] = useState(false);
   const [name, setName] = useState(user.name);
   const [genre, setGenre] = useState(user.genre);

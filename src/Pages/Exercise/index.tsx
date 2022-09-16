@@ -1,38 +1,24 @@
-import {
-  Box,
-  Button,
-  Container,
-  Flex,
-  FormLabel,
-  Grid,
-  Heading,
-  Image,
-  Link,
-  Select,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Button, Container, Flex, Heading, Text } from "@chakra-ui/react";
 import { Link as ReactRouterLink } from "react-router-dom";
-import React, { useContext, useEffect, useState } from "react";
+import { useEffect } from "react";
 import ReactPlayer from "react-player";
 import { useParams } from "react-router-dom";
-import { MuscleContext } from "../../Providers/Muscle";
 import { theme } from "../../Styles/theme";
 import { useAuth } from "../../Providers/AuthContext";
+import { useMuscle } from "../../Providers/Muscle";
 
 interface Params {
   exerciseName: string;
 }
 
 export const Exercise = () => {
-  const { listTrainigs, loadTraining } = useContext(MuscleContext);
+  const { listTrainigs, loadTraining } = useMuscle();
   const { exerciseName } = useParams<Params>();
   const { accessToken, user } = useAuth();
 
   const trainig = listTrainigs.find(
     (element) => element.title === exerciseName
   );
-
-  console.log(trainig);
 
   useEffect(() => {
     loadTraining(accessToken, user);

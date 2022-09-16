@@ -19,13 +19,12 @@ import {
 import React, { useContext, useEffect, useState } from "react";
 import { useAuth } from "../Providers/AuthContext";
 import { api } from "../Services/api";
-import { MuscleContext } from "../Providers/Muscle";
 import { useLogin } from "../Providers/Login";
+import { useMuscle } from "../Providers/Muscle";
 
 export const ImcCalculator = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { Muscle, MuscleAtt, MuscleRegister, weight, height } =
-    useContext(MuscleContext);
+  const { Muscle, MuscleAtt, MuscleRegister, weight, height } = useMuscle();
   const [weightV, setWeight] = useState(0);
   const [heightV, setHeight] = useState(0);
   const [imc, setImc] = useState<number>(0);

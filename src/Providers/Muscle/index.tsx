@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import { createContext, ReactNode, useState } from "react";
 
 import { api } from "../../Services/api";
@@ -40,12 +41,9 @@ interface Muscledata {
 
 const MuscleContext = createContext<MuscleContextData>({} as MuscleContextData);
 
+const useMuscle = () => useContext(MuscleContext);
+
 const MuscleProvider = ({ children }: ChildrenProp) => {
-  const [token, setToken] = useState(
-    localStorage.getItem("@Fitness:accessToken") || ""
-  );
-
-
   const { accessToken } = useAuth();
 
   const [weight, setWeight] = useState<number>(0);
@@ -124,4 +122,4 @@ const MuscleProvider = ({ children }: ChildrenProp) => {
   );
 };
 
-export { MuscleProvider, MuscleContext };
+export { MuscleProvider, useMuscle };
