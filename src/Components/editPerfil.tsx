@@ -24,6 +24,8 @@ import { motion } from "framer-motion";
 import { itemLeft } from "../Styles/animate";
 import { AiFillSetting } from "react-icons/ai";
 
+////
+
 export const EditPerfil = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { user, Muscle, weight, height } = useAuth();
