@@ -25,6 +25,7 @@ import bgMenu from "../Imgs/bg-menu.svg";
 import { motion } from "framer-motion";
 import { container, item, itemLeft } from "../Styles/animate";
 import { EditPerfil } from "./EditPerfil";
+///
 export const Menu = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { user, accessToken, logOut } = useAuth();
