@@ -9,19 +9,15 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
-  Heading,
-  Flex,
-  FormControl,
-  FormLabel,
   ModalFooter,
   Input,
   Text,
 } from "@chakra-ui/react";
 import { FiCheck, FiX } from "react-icons/fi";
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { useLogin } from "../Providers/Login";
 import { MuscleContext } from "../Providers/Muscle";
-import { useUser } from "../Providers/user";
+import { useUser } from "../Providers/User";
 
 export const EditPerfil = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
