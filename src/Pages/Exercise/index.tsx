@@ -3,7 +3,7 @@ import { Link as ReactRouterLink } from "react-router-dom";
 import { useEffect } from "react";
 import ReactPlayer from "react-player";
 import { useParams } from "react-router-dom";
-import { theme } from "../../Styles/theme";
+
 import { useAuth } from "../../Providers/AuthContext";
 import { useMuscle } from "../../Providers/Muscle";
 
@@ -12,9 +12,8 @@ interface Params {
 }
 
 export const Exercise = () => {
-  const { listTrainigs, loadTraining } = useMuscle();
   const { exerciseName } = useParams<Params>();
-  const { accessToken, user } = useAuth();
+  const { accessToken, user, listTrainigs, loadTraining } = useAuth();
 
   const trainig = listTrainigs.find(
     (element) => element.title === exerciseName
@@ -36,9 +35,9 @@ export const Exercise = () => {
         >
           <Button></Button>
           <Button
-            background={theme.colors.primary}
-            color={theme.colors.black}
-            fontFamily={theme.fonts.title}
+            background="primary"
+            color="black"
+            fontFamily="title"
             fontSize={["10px", "14px", "16px", "16px"]}
             as={ReactRouterLink}
             to="/training"
@@ -60,9 +59,14 @@ export const Exercise = () => {
           flexDirection="column"
           alignItems="flex-start"
         >
-          <ReactPlayer url={trainig?.videoURL} width="100%" controls={true} />
+          <ReactPlayer
+            url={trainig?.videoURL}
+            width="100%"
+            controls={true}
+            height="60%"
+          />
           <Heading
-            color={theme.colors.primary}
+            color="primary"
             fontSize={["20px", "20px", "30px", "40px"]}
             marginTop="15px"
           >
@@ -71,7 +75,7 @@ export const Exercise = () => {
           <Text
             fontSize={["12px", "16px", "18px", "18px"]}
             marginTop="5px"
-            color={theme.colors.secondary}
+            color="secondary"
           >
             {trainig?.category}
           </Text>

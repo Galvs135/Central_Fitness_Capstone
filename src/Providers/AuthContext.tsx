@@ -14,6 +14,15 @@ interface ContextProps {
   user: User;
   accessToken: string;
   signIn: (credentials: SignInCredentials) => Promise<void>;
+  weight: number;
+  height: number;
+  Muscle: (id: string) => void;
+  listTrainigs: Training[];
+  loadTraining(token: string, user: User): void;
+  MuscleAtt: (id: string, data: Muscledata) => void;
+
+  logOut: () => void;
+
 }
 
 interface ChildrenProp {
@@ -43,6 +52,27 @@ interface LoginState {
   user: User;
 }
 
+interface Training {
+  id: number;
+  title: string;
+  category: string;
+  description: string;
+  videoURL: string;
+  genre: "feminino" | "masculino";
+}
+
+interface Muscledata {
+  weight: number;
+  height: number;
+}
+
+interface User {
+  email: string;
+  name: string;
+  genre: string;
+  id: string;
+}
+
 const AuthContext = createContext<ContextProps>({} as ContextProps);
 
 const useAuth = () => {
@@ -65,6 +95,9 @@ const AuthProvider = ({ children }: ChildrenProp) => {
     }
     return {} as LoginState;
   });
+  const [weight, setWeight] = useState<number>(0);
+  const [height, setHeight] = useState<number>(0);
+  const [listTrainigs, setListTrainings] = useState<Training[]>([]);
 
   const signIn = useCallback(async ({ email, password }: SignInCredentials) => {
     api
@@ -133,9 +166,77 @@ const AuthProvider = ({ children }: ChildrenProp) => {
       });
   };
 
+  const Muscle = (id: string) => {
+    if (id) {
+      api
+        .get(`/users/${id}/muscles`, {
+          headers: {
+            Authorization: `Bearer ${data.accessToken}`,
+          },
+        })
+        .then((response) => {
+          setWeight(response.data[0].weight);
+          setHeight(response.data[0].height);
+        })
+        .catch((response) => console.log(response));
+    }
+  };
+
+  const MuscleAtt = (id: string, info: Muscledata) => {
+    console.log(id);
+    api.patch(`/muscles/${id}/`, info, {
+      headers: {
+        Authorization: `Bearer ${data.accessToken}`,
+      },
+    });
+  };
+
+  const loadTraining = (token: string, user: User) => {
+    api
+      .get("/training", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        const list = response.data;
+
+        const filteredByGenre = list.filter(
+          (training: Training) =>
+            training.genre.toLowerCase() === user.genre.toLowerCase()
+        );
+
+        setListTrainings(filteredByGenre);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+
+  const logOut = () => {
+    localStorage.clear();
+    setData({} as LoginState);
+    history.push("/");
+  };
+
+
   return (
     <AuthContext.Provider
-      value={{ singUp, signIn, accessToken: data.accessToken, user: data.user }}
+      value={{
+        singUp,
+        signIn,
+        accessToken: data.accessToken,
+        user: data.user,
+        Muscle,
+        MuscleAtt,
+        weight,
+        height,
+        loadTraining,
+        listTrainigs,
+        logOut,
+
+      }}
     >
       {children}
     </AuthContext.Provider>

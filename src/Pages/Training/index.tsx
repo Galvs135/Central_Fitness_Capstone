@@ -4,12 +4,11 @@ import { Flex, Image } from "@chakra-ui/react";
 import { CardTraining } from "../../Components/CardTraining";
 
 import { useAuth } from "../../Providers/AuthContext";
-import { useMuscle } from "../../Providers/Muscle";
 
 import TrainingImage from "../../Imgs/training.png";
 
 export const Training = () => {
-  const { listTrainigs, loadTraining } = useMuscle();
+  const { listTrainigs, loadTraining } = useAuth();
   const { accessToken, user } = useAuth();
 
   useEffect(() => {
