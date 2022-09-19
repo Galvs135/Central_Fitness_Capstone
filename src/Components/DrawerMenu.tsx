@@ -81,13 +81,16 @@ export const DrawerMenu = ({
             >
               <ItemMenu title="FITNESS" path="/fitnessHome" />
               <ItemMenu title="TREINOS" path="/training" />
-              <ItemMenu title="SOBRE NOS" path="/" />
+              <ItemMenu title="SOBRE NOS" path="/aboutus" />
               <ItemMenu title="NUTRIÇÃO" path="/nutrition" />
             </List>
           </Flex>
         </DrawerBody>
         <DrawerFooter>
-          <Operation onUpdatePerfilOpen={onUpdatePerfilOpen} />
+          <Operation
+            onUpdatePerfilOpen={onUpdatePerfilOpen}
+            onDrawerMenuClose={onDrawerMenuClose}
+          />
         </DrawerFooter>
       </DrawerContent>
     </Drawer>

@@ -12,9 +12,13 @@ import linkCss from "../Styles/link";
 
 interface OperationProps {
   onUpdatePerfilOpen(): void;
+  onDrawerMenuClose(): void;
 }
 
-export const Operation = ({ onUpdatePerfilOpen }: OperationProps) => {
+export const Operation = ({
+  onUpdatePerfilOpen,
+  onDrawerMenuClose,
+}: OperationProps) => {
   const { logOut, Muscle, user } = useAuth();
   return (
     <List
@@ -31,6 +35,7 @@ export const Operation = ({ onUpdatePerfilOpen }: OperationProps) => {
           sx={linkCss}
           onClick={() => {
             onUpdatePerfilOpen();
+            onDrawerMenuClose();
             Muscle(user.id);
           }}
         >

@@ -45,7 +45,6 @@ export const UpdatePerfil = ({
         isOpen={isUpdatePerfilOpen}
         onClose={onUpdatePerfilClose}
         size="lg"
-        blockScrollOnMount={false}
       >
         <ModalOverlay />
         <ModalContent background="black">
