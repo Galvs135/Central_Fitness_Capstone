@@ -193,10 +193,10 @@ export const UpdatePerfil = () => {
 
           <ModalFooter display="flex" justifyContent="space-around">
             <Text fontFamily={theme.fonts.title} fontSize="18px">
-              {weight}
+              {`${weight} KG`}
             </Text>
             <Text fontFamily={theme.fonts.title} fontSize="18px">
-              {height}
+              {`${height} M`}
             </Text>
           </ModalFooter>
         </ModalContent>
