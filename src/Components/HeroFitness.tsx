@@ -14,8 +14,6 @@ export const HeroFitness = () => {
       as="section"
       flexDir={["column", "column", "column", "row"]}
       justifyContent="flex-start"
-      position="relative"
-      pt="42px"
     >
       <Box
         bg={theme.colors.primary}

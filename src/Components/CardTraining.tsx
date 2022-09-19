@@ -1,11 +1,12 @@
-import { Flex, Heading, Image } from "@chakra-ui/react";
+import { Box, Flex, Heading, Image, Text } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 import { useHistory } from "react-router-dom";
 
-import AbdomenIcon from "../Imgs/abdomen_Icon.png";
-import ArmIcon from "../Imgs/arm_Icon.png";
-import BackIcon from "../Imgs/back_Icon.png";
-import ChestIcon from "../Imgs/chest_Icon.png";
-import LegIcon from "../Imgs/leg_Icon.png";
+import AbdomenImg from "../Imgs/abdomen_Img.png";
+import ArmImg from "../Imgs/arm_Img.png";
+import BackImg from "../Imgs/back_Img.png";
+import ChestImg from "../Imgs/chest_Img.png";
+import LegImg from "../Imgs/leg_Img.png";
 
 interface Training {
   id: number;
@@ -23,19 +24,19 @@ interface CardTrainingProps {
 export const CardTraining = ({ training }: CardTrainingProps) => {
   const categoryFigure = (category: string) => {
     if (category === "abdomen") {
-      return AbdomenIcon;
+      return AbdomenImg;
     }
     if (category === "pernas") {
-      return LegIcon;
+      return LegImg;
     }
     if (category === "peito") {
-      return ChestIcon;
+      return ChestImg;
     }
     if (category === "braço") {
-      return ArmIcon;
+      return ArmImg;
     }
     if (category === "costas") {
-      return BackIcon;
+      return BackImg;
     }
   };
   const history = useHistory();
@@ -45,21 +46,33 @@ export const CardTraining = ({ training }: CardTrainingProps) => {
   };
 
   return (
-    <Flex
-      w={["325px", "325px", "425px"]}
-      bg="#686565"
-      alignItems="center"
-      m="12px 0px"
-      borderRadius="8px"
-      paddingLeft="3.5"
-      paddingY="30px"
+    <Box
+      as={motion.div}
+      layout
       cursor="pointer"
       onClick={() => goToExercise(training.title)}
+      bgImage={categoryFigure(training.category)}
+      bgRepeat="no-repeat"
+      bgSize="cover"
+      h="170px"
+      minW={["100%"]}
+      w="100%"
+      rounded={8}
+      overflow="hidden"
     >
-      <Image src={categoryFigure(training.category)} w="25px" h="25px" />
-      <Heading as="h3" fontSize="14px" ml="2.5">
-        {training.title}
-      </Heading>
-    </Flex>
+      <Flex
+        flexDirection="column"
+        gap={2}
+        alignItems="center"
+        justifyContent="center"
+        h="100%"
+        bgGradient="linear-gradient(to-b, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 35%, rgba(0, 0, 0, 0.4) 65%, rgba(0, 0, 0, 0) 100%)"
+      >
+        <Heading as="h3" fontSize="lg">
+          {training.title}
+        </Heading>
+        <Text fontSize="md">{training.category}</Text>
+      </Flex>
+    </Box>
   );
 };
