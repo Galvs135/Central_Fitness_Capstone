@@ -5,6 +5,7 @@ import {
   ReactNode,
   useState,
   useCallback,
+  useEffect,
 } from "react";
 import { useHistory } from "react-router-dom";
 import { api } from "../Services/api";
@@ -22,7 +23,6 @@ interface ContextProps {
   MuscleAtt: (id: string, data: Muscledata) => void;
 
   logOut: () => void;
-
 }
 
 interface ChildrenProp {
@@ -98,6 +98,13 @@ const AuthProvider = ({ children }: ChildrenProp) => {
   const [weight, setWeight] = useState<number>(0);
   const [height, setHeight] = useState<number>(0);
   const [listTrainigs, setListTrainings] = useState<Training[]>([]);
+
+  useEffect(() => {
+    if (data.accessToken) {
+      loadTraining();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const signIn = useCallback(async ({ email, password }: SignInCredentials) => {
     api
@@ -183,7 +190,6 @@ const AuthProvider = ({ children }: ChildrenProp) => {
   };
 
   const MuscleAtt = (id: string, info: Muscledata) => {
-    console.log(id);
     api.patch(`/muscles/${id}/`, info, {
       headers: {
         Authorization: `Bearer ${data.accessToken}`,
@@ -191,35 +197,52 @@ const AuthProvider = ({ children }: ChildrenProp) => {
     });
   };
 
-  const loadTraining = (token: string, user: User) => {
+  const loadTraining = () => {
     api
       .get("/training", {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${data.accessToken}`,
         },
       })
       .then((response) => {
         const list = response.data;
-
         const filteredByGenre = list.filter(
           (training: Training) =>
-            training.genre.toLowerCase() === user.genre.toLowerCase()
+            training.genre.toLowerCase() === data.user.genre.toLowerCase()
         );
 
         setListTrainings(filteredByGenre);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(({ response }) => {
+        if (response.status === 401) {
+          logOut();
+          toast({
+            position: "top",
+            title: "Sua sessão expirou",
+            description: "Por favor, faça o login novamente",
+            status: "warning",
+            duration: 2000,
+            isClosable: true,
+          });
+        } else {
+          toast({
+            position: "top",
+            title: "Ocorreu um error",
+            description:
+              "Erro desconhecido por favor tente novamente mais tarde",
+            status: "error",
+            duration: 2000,
+            isClosable: true,
+          });
+        }
       });
   };
-
 
   const logOut = () => {
     localStorage.clear();
     setData({} as LoginState);
     history.push("/");
   };
-
 
   return (
     <AuthContext.Provider
@@ -235,7 +258,6 @@ const AuthProvider = ({ children }: ChildrenProp) => {
         loadTraining,
         listTrainigs,
         logOut,
-
       }}
     >
       {children}
