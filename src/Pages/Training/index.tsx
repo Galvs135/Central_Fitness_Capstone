@@ -1,11 +1,4 @@
-import {
-  Flex,
-  InputGroup,
-  Input,
-  Grid,
-  Container,
-  Box,
-} from "@chakra-ui/react";
+import { InputGroup, Input, Grid, Container, Box } from "@chakra-ui/react";
 import { CardTraining } from "../../Components/CardTraining";
 import TrainingImage from "../../Imgs/training.png";
 import { useEffect, useState } from "react";
@@ -13,7 +6,7 @@ import { useAuth } from "../../Providers/AuthContext";
 import { motion } from "framer-motion";
 import { FaSearch } from "react-icons/fa";
 
-interface Training {
+interface TrainingProps {
   category: string;
   genre: "feminino" | "masculino";
   title: string;
@@ -24,14 +17,15 @@ interface Training {
 
 export const Training = () => {
   const { accessToken, user, loadTraining, listTrainigs } = useAuth();
-  const [trainingFind, setTrainingFind] = useState<Training[]>(
-    [] as Training[]
+  const [trainingFind, setTrainingFind] = useState<TrainingProps[]>(
+    [] as TrainingProps[]
   );
 
   useEffect(() => {
     if (accessToken) {
       loadTraining(accessToken, user);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const findTraining = (value: string) => {
