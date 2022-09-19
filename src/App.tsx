@@ -1,10 +1,12 @@
 import { Menu } from "./Components/Menu";
+import { useAuth } from "./Providers/AuthContext";
 import { RoutesApplication } from "./Routes";
 
 function App() {
+  const { accessToken } = useAuth();
   return (
     <>
-      <Menu />
+      {accessToken ? <Menu /> : null}
       <RoutesApplication />
     </>
   );
