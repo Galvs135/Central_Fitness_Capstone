@@ -1,3 +1,4 @@
+import { Box } from "@chakra-ui/react";
 import { Redirect, Switch } from "react-router-dom";
 import { Exercise } from "../Pages/Exercise";
 import { FitnessHome } from "../Pages/Fitness";
@@ -10,14 +11,16 @@ import { Route } from "./routes";
 
 export const RoutesApplication = () => {
   return (
-    <Switch>
-      <Route component={Login} exact path="/" />
-      <Route component={Register} path="/register" />
-      <Route component={FitnessHome} path="/fitnessHome" isPrivate />
-      <Route component={Nutrition} path="/nutrition" isPrivate />
-      <Route component={Training} exact path="/training" isPrivate />
-      <Route component={Exercise} path="/training/:exerciseName" isPrivate />
-      <Route component={() => <Redirect to="/" />} path="/*" />
-    </Switch>
+    <Box gridArea="main">
+      <Switch>
+        <Route component={Login} exact path="/" />
+        <Route component={Register} path="/register" />
+        <Route component={FitnessHome} path="/fitnessHome" isPrivate />
+        <Route component={Nutrition} path="/nutrition" isPrivate />
+        <Route component={Training} exact path="/training" isPrivate />
+        <Route component={Exercise} path="/training/:exerciseName" isPrivate />
+        <Route component={() => <Redirect to="/" />} path="/*" />
+      </Switch>
+    </Box>
   );
 };

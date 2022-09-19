@@ -1,8 +1,17 @@
-import { Button, Flex, Image, InputGroup, Input } from "@chakra-ui/react";
+import {
+  Flex,
+  InputGroup,
+  Input,
+  Grid,
+  Container,
+  Box,
+} from "@chakra-ui/react";
 import { CardTraining } from "../../Components/CardTraining";
 import TrainingImage from "../../Imgs/training.png";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../Providers/AuthContext";
+import { motion } from "framer-motion";
+import { FaSearch } from "react-icons/fa";
 
 interface Training {
   category: string;
@@ -14,8 +23,7 @@ interface Training {
 }
 
 export const Training = () => {
-  const { listTrainigs, loadTraining } = useAuth();
-  const { accessToken, user } = useAuth();
+  const { accessToken, user, loadTraining, listTrainigs } = useAuth();
   const [trainingFind, setTrainingFind] = useState<Training[]>(
     [] as Training[]
   );
@@ -25,15 +33,6 @@ export const Training = () => {
       loadTraining(accessToken, user);
     }
   }, []);
-
-  //const cardData = {
-  //  id: 1,
-  //  title: "Café dos TOP",
-  //  category: "Manhã",
-  //  imageURL: "https://i.imgur.com/EXcGOYj.png",
-  //  ingredients: ["banana frita", "maçã", "pera"],
-  //  preparation: ["frite a banana e picote as frutas"],
-  //};
 
   const findTraining = (value: string) => {
     console.log(value);
@@ -46,72 +45,85 @@ export const Training = () => {
     setTrainingFind(findText);
   };
 
-  console.log(trainingFind);
-
   return (
-    <Flex
-      position="relative"
-      w="100%"
-      m="auto"
-      display="flex"
-      flexDirection="column"
-      justifyContent="center"
-    >
-      <InputGroup>
-        <Input
-          onChange={({ target }) => findTraining(target.value)}
-          bg="#3D3522"
-          borderColor="#000000"
-          borderWidth="2px"
-          _hover={{
-            borderColor: "#000000",
-            boxShadow: "0 0 0 2px #3d352245",
-          }}
-          _focus={{
-            borderColor: "#000000",
-            boxShadow: "0 0 0 3px #3d352245",
-          }}
-          marginTop="100px"
-          width={["90%", "90%", "95%", "30%"]}
-          marginLeft="20px"
-        />
-      </InputGroup>
-      <Flex
-        flexDir="column"
-        alignItems="center"
-        w="100%"
-        h="80vh"
-        overflowY="scroll"
-        marginTop="50px"
-        sx={{
-          "&::-webkit-scrollbar": {
-            width: "5px",
-            borderRadius: "7px",
-            backgroundColor: `transparent`,
-          },
-          "&::-webkit-scrollbar-thumb": {
-            background: "primary",
-          },
-        }}
+    <>
+      <Grid
+        gridTemplateRows="minmax(50px,65px) 1fr"
+        bgImage={[TrainingImage]}
+        bgPos="bottom right"
+        bgRepeat="no-repeat"
+        bgSize="50%"
       >
-        {trainingFind.length > 0
-          ? trainingFind.map((training) => (
-              <CardTraining key={training.id} training={training} />
-            ))
-          : listTrainigs.map((training) => (
-              <CardTraining key={training?.id} training={training} />
-            ))}
-      </Flex>
+        <Container maxW="container.xl" px={4}>
+          <InputGroup maxW="450px" mx="auto" mb={[2]}>
+            <Input
+              onChange={({ target }) => findTraining(target.value)}
+              bg="#3D3522"
+              borderColor="#000000"
+              borderWidth="2px"
+              _hover={{
+                borderColor: "#000000",
+                boxShadow: "0 0 0 2px #3d352245",
+              }}
+              _focus={{
+                borderColor: "#000000",
+                boxShadow: "0 0 0 3px #3d352245",
+              }}
+              width={["100%"]}
+              placeholder="Pesquise seu treino..."
+              pr={15}
+              type="search"
+            />
 
-      <Image
-        src={TrainingImage}
-        display={["none", "none", "none", "none", "block"]}
-        position="absolute"
-        left="52%"
-        top="20%"
-        zIndex="-1"
-        w="655px"
-      />
-    </Flex>
+            <Box
+              position="absolute"
+              right={5}
+              top="50%"
+              transform="translateY(-50%)"
+              zIndex="9"
+            >
+              <FaSearch />
+            </Box>
+          </InputGroup>
+        </Container>
+        <Grid
+          px={4}
+          as={motion.div}
+          gridTemplateColumns={[
+            "repeat(1,1fr)",
+            "repeat(3,1fr)",
+            "repeat(3,1fr)",
+            "repeat(4,1fr)",
+          ]}
+          alignContent="start"
+          justifyItems="center"
+          pb={6}
+          maxW="container.xl"
+          w="100%"
+          m="0 auto"
+          gap={[4, 4, 6, 8]}
+          h="80vh"
+          overflowY="scroll"
+          sx={{
+            "&::-webkit-scrollbar": {
+              width: "5px",
+              borderRadius: "7px",
+              backgroundColor: `transparent`,
+            },
+            "&::-webkit-scrollbar-thumb": {
+              background: "primary",
+            },
+          }}
+        >
+          {trainingFind.length > 0
+            ? trainingFind.map((training) => (
+                <CardTraining key={training.id} training={training} />
+              ))
+            : listTrainigs.map((training) => (
+                <CardTraining key={training?.id} training={training} />
+              ))}
+        </Grid>
+      </Grid>
+    </>
   );
 };

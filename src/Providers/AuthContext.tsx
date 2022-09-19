@@ -21,7 +21,6 @@ interface ContextProps {
   listTrainigs: Training[];
   loadTraining(token: string, user: User): void;
   MuscleAtt: (id: string, data: Muscledata) => void;
-
   logOut: () => void;
 }
 
