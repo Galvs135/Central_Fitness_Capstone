@@ -13,7 +13,9 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { FiCheck, FiX } from "react-icons/fi";
+
 import { useState } from "react";
+
 import { useAuth } from "../Providers/AuthContext";
 import { useUser } from "../Providers/user";
 
@@ -38,6 +40,7 @@ export const UpdatePerfil = ({
   const Actualization = () => {
     AInformation({ name: name, genre: genre });
   };
+
 
   return (
     <>
@@ -127,10 +130,10 @@ export const UpdatePerfil = ({
 
           <ModalFooter display="flex" justifyContent="space-around">
             <Text fontFamily={theme.fonts.title} fontSize="18px">
-              {weight}
+              {`${weight} KG`}
             </Text>
             <Text fontFamily={theme.fonts.title} fontSize="18px">
-              {height}
+              {`${height} M`}
             </Text>
           </ModalFooter>
         </ModalContent>
