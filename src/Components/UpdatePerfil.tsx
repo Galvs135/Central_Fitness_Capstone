@@ -61,6 +61,7 @@ export const UpdatePerfil = () => {
     display: "flex",
     alignItems: "center",
     gap: 4,
+
     fontFamily: "title",
     position: "relative",
     "&:hover": {
