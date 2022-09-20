@@ -1,4 +1,6 @@
-import { InputGroup, Input, Grid, Container, Box } from "@chakra-ui/react";
+
+import { Flex, Image, InputGroup, Input } from "@chakra-ui/react";
+
 import { CardTraining } from "../../Components/CardTraining";
 import TrainingImage from "../../Imgs/training.png";
 import { useEffect, useState } from "react";
@@ -16,6 +18,7 @@ interface TrainingProps {
 }
 
 export const Training = () => {
+
   const { accessToken, user, loadTraining, listTrainigs } = useAuth();
   const [trainingFind, setTrainingFind] = useState<TrainingProps[]>(
     [] as TrainingProps[]
@@ -29,8 +32,6 @@ export const Training = () => {
   }, []);
 
   const findTraining = (value: string) => {
-    console.log(value);
-
     let findText = listTrainigs.filter(
       (element) =>
         element.category.toLowerCase().startsWith(value.toLowerCase()) ||
