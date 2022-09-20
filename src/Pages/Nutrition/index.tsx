@@ -1,5 +1,9 @@
+import { InforNutrition } from "../../Components/InforNutri";
+
 export const Nutrition = () => {
   return (
-    <div>Pagina criada para renderizar componente nas rotas (Nutrição)</div>
+    <>
+      <InforNutrition />
+    </>
   );
 };
