@@ -1,10 +1,10 @@
-import { Button, Flex, Image, InputGroup, Input } from "@chakra-ui/react";
+import { Flex, Image, InputGroup, Input } from "@chakra-ui/react";
 import { CardTraining } from "../../Components/CardTraining";
 import TrainingImage from "../../Imgs/training.png";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../Providers/AuthContext";
 
-interface Training {
+interface TrainingProps {
   category: string;
   genre: "feminino" | "masculino";
   title: string;
@@ -16,28 +16,18 @@ interface Training {
 export const Training = () => {
   const { listTrainigs, loadTraining } = useAuth();
   const { accessToken, user } = useAuth();
-  const [trainingFind, setTrainingFind] = useState<Training[]>(
-    [] as Training[]
+  const [trainingFind, setTrainingFind] = useState<TrainingProps[]>(
+    [] as TrainingProps[]
   );
 
   useEffect(() => {
     if (accessToken) {
       loadTraining(accessToken, user);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  //const cardData = {
-  //  id: 1,
-  //  title: "Café dos TOP",
-  //  category: "Manhã",
-  //  imageURL: "https://i.imgur.com/EXcGOYj.png",
-  //  ingredients: ["banana frita", "maçã", "pera"],
-  //  preparation: ["frite a banana e picote as frutas"],
-  //};
-
   const findTraining = (value: string) => {
-    console.log(value);
-
     let findText = listTrainigs.filter(
       (element) =>
         element.category.toLowerCase().startsWith(value.toLowerCase()) ||
@@ -45,8 +35,6 @@ export const Training = () => {
     );
     setTrainingFind(findText);
   };
-
-  console.log(trainingFind);
 
   return (
     <Flex

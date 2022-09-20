@@ -17,10 +17,9 @@ export const Exercise = () => {
     (element) => element.title === exerciseName
   );
 
-  console.log(trainig);
-
   useEffect(() => {
     loadTraining(accessToken, user);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
