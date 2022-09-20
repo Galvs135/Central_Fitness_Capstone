@@ -15,12 +15,9 @@ interface ContextProps {
   user: User;
   accessToken: string;
   signIn: (credentials: SignInCredentials) => Promise<void>;
-  weight: number;
-  height: number;
-  Muscle: (id: string) => void;
+  getUser: () => void;
   listTrainigs: Training[];
   loadTraining(token: string, user: User): void;
-  MuscleAtt: (id: string, data: Muscledata) => void;
   logOut: () => void;
 }
 
@@ -60,11 +57,6 @@ interface Training {
   genre: "feminino" | "masculino";
 }
 
-interface Muscledata {
-  weight: number;
-  height: number;
-}
-
 interface User {
   email: string;
   name: string;
@@ -94,8 +86,7 @@ const AuthProvider = ({ children }: ChildrenProp) => {
     }
     return {} as LoginState;
   });
-  const [weight, setWeight] = useState<number>(0);
-  const [height, setHeight] = useState<number>(0);
+
   const [listTrainigs, setListTrainings] = useState<Training[]>([]);
 
   useEffect(() => {
@@ -137,6 +128,56 @@ const AuthProvider = ({ children }: ChildrenProp) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const getUser = useCallback(async () => {
+    if (data.accessToken) {
+      api
+        .get(`users/${data.user.id}`, {
+          headers: {
+            Authorization: `Bearer ${data.accessToken}`,
+          },
+        })
+        .then((response) => {
+          const { genre, name } = response.data;
+          localStorage.setItem(
+            "@Fitness:user",
+            JSON.stringify({
+              ...data,
+              user: { ...data.user, name: name, genre: genre },
+            })
+          );
+          setData({
+            ...data,
+            user: { ...data.user, name: name, genre: genre },
+          });
+        })
+        .catch(({ response }) => {
+          if (response.status === 401) {
+            logOut();
+            toast({
+              position: "top",
+              title: "Sua sessão expirou",
+              description: "Por favor, faça o login novamente",
+              status: "warning",
+              duration: 2000,
+              isClosable: true,
+            });
+          } else {
+            toast({
+              position: "top",
+              title: "Ocorreu um error",
+              description:
+                "Erro desconhecido por favor tente novamente mais tarde",
+              status: "error",
+              duration: 2000,
+              isClosable: true,
+            });
+          }
+        });
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const singUp = (data: SingUpCredentials) => {
     api
       .post("/register", data)
@@ -170,30 +211,6 @@ const AuthProvider = ({ children }: ChildrenProp) => {
           isClosable: true,
         });
       });
-  };
-
-  const Muscle = (id: string) => {
-    if (id) {
-      api
-        .get(`/users/${id}/muscles`, {
-          headers: {
-            Authorization: `Bearer ${data.accessToken}`,
-          },
-        })
-        .then((response) => {
-          setWeight(response.data[0].weight);
-          setHeight(response.data[0].height);
-        })
-        .catch((response) => console.log(response));
-    }
-  };
-
-  const MuscleAtt = (id: string, info: Muscledata) => {
-    api.patch(`/muscles/${id}/`, info, {
-      headers: {
-        Authorization: `Bearer ${data.accessToken}`,
-      },
-    });
   };
 
   const loadTraining = () => {
@@ -250,13 +267,10 @@ const AuthProvider = ({ children }: ChildrenProp) => {
         signIn,
         accessToken: data.accessToken,
         user: data.user,
-        Muscle,
-        MuscleAtt,
-        weight,
-        height,
         loadTraining,
         listTrainigs,
         logOut,
+        getUser,
       }}
     >
       {children}

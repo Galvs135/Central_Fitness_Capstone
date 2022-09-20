@@ -1,10 +1,14 @@
 import { useToast } from "@chakra-ui/react";
-import { createContext, useContext, ReactNode } from "react";
+import { createContext, useContext, ReactNode, useState } from "react";
 import { api } from "../../Services/api";
 import { useAuth } from "../AuthContext";
 
 interface ContextProps {
   AInformation: (data: Actualization) => void;
+  MuscleAtt: (id: string, data: Muscledata) => void;
+  weight: number;
+  height: number;
+  Muscle: (id: string) => void;
 }
 
 interface ChildrenProp {
@@ -14,6 +18,11 @@ interface ChildrenProp {
 interface Actualization {
   name: string;
   genre: string;
+}
+
+interface Muscledata {
+  weight: number;
+  height: number;
 }
 
 const UserContext = createContext<ContextProps>({} as ContextProps);
@@ -26,9 +35,11 @@ const useUser = () => {
   return context;
 };
 
-const AuthProvider = ({ children }: ChildrenProp) => {
+const UserProvider = ({ children }: ChildrenProp) => {
+  const [weight, setWeight] = useState<number>(0);
+  const [height, setHeight] = useState<number>(0);
   const toast = useToast();
-  const { user, accessToken } = useAuth();
+  const { user, accessToken, getUser } = useAuth();
 
   const AInformation = (data: Actualization) => {
     api
@@ -46,6 +57,7 @@ const AuthProvider = ({ children }: ChildrenProp) => {
           duration: 3000,
           isClosable: true,
         });
+        getUser();
       })
       .catch((_) => {
         toast({
@@ -59,11 +71,37 @@ const AuthProvider = ({ children }: ChildrenProp) => {
       });
   };
 
+  const Muscle = (id: string) => {
+    if (id) {
+      api
+        .get(`/users/${id}/muscles`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .then((response) => {
+          setWeight(response.data[0].weight);
+          setHeight(response.data[0].height);
+        })
+        .catch((response) => console.log(response));
+    }
+  };
+
+  const MuscleAtt = (id: string, info: Muscledata) => {
+    api.patch(`/muscles/${id}/`, info, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+  };
+
   return (
-    <UserContext.Provider value={{ AInformation }}>
+    <UserContext.Provider
+      value={{ AInformation, height, Muscle, MuscleAtt, weight }}
+    >
       {children}
     </UserContext.Provider>
   );
 };
 
-export { AuthProvider, useUser };
+export { UserProvider, useUser };

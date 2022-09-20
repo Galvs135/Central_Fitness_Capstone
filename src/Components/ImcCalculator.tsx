@@ -21,12 +21,13 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import React, { useState } from "react";
 import { useAuth } from "../Providers/AuthContext";
+import { useUser } from "../Providers/User";
 
 const signInSchema = yup.object().shape({
-  weight: yup.number().required("Campo Obrigatorio"),
+  weight: yup.number().required("Campo Obrigatório"),
   height: yup
     .number()
-    .required("Campo Obrigatorio")
+    .required("Campo Obrigatório")
     .min(1, "Altura Minima atingida")
     .max(2.5, "Altura maxima atingida"),
 });
@@ -38,18 +39,14 @@ interface Calculate {
 
 export const ImcCalculator = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { Muscle, MuscleAtt, weight, height } = useAuth();
+  const { Muscle, MuscleAtt, weight, height } = useUser();
   const [imc, setImc] = useState<number>(0);
   const { user } = useAuth();
 
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
 
-  const {
-    formState: { errors },
-    handleSubmit,
-    register,
-  } = useForm<Calculate>({
+  const { handleSubmit, register } = useForm<Calculate>({
     resolver: yupResolver(signInSchema),
   });
 

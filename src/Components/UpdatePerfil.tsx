@@ -28,8 +28,8 @@ export const UpdatePerfil = ({
   isUpdatePerfilOpen,
   onUpdatePerfilClose,
 }: UpdatePerfilProps) => {
-  const { user, weight, height } = useAuth();
-  const { AInformation } = useUser();
+  const { user } = useAuth();
+  const { AInformation, weight, height } = useUser();
   const [edit, setEdit] = useState(false);
   const [name, setName] = useState(user.name);
   const [genre, setGenre] = useState(user.genre);
@@ -45,7 +45,12 @@ export const UpdatePerfil = ({
     <>
       <Modal
         isOpen={isUpdatePerfilOpen}
-        onClose={onUpdatePerfilClose}
+        onClose={() => {
+          onUpdatePerfilClose();
+          setEdit(false);
+          setName(user?.name);
+          setGenre(user?.genre);
+        }}
         size="lg"
       >
         <ModalOverlay />

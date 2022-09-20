@@ -9,6 +9,7 @@ import { itemLeft, container } from "../Styles/animate";
 import { useAuth } from "../Providers/AuthContext";
 import { AiFillSetting } from "react-icons/ai";
 import linkCss from "../Styles/link";
+import { useUser } from "../Providers/User";
 
 interface OperationProps {
   onUpdatePerfilOpen(): void;
@@ -19,7 +20,8 @@ export const Operation = ({
   onUpdatePerfilOpen,
   onDrawerMenuClose,
 }: OperationProps) => {
-  const { logOut, Muscle, user } = useAuth();
+  const { logOut, user } = useAuth();
+  const { Muscle } = useUser();
   return (
     <List
       as={motion.nav}
