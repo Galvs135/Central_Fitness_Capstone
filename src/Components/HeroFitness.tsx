@@ -2,7 +2,7 @@ import { Box, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import { GraficRepresentation } from "./GraficRepresentation";
 
 import { theme } from "../Styles/theme";
-import { EditPerfil } from "./editPerfil";
+
 import { ImcCalculator } from "./ImcCalculator";
 
 import IntroductionFitness from "../Imgs/introduction-fitness.png";

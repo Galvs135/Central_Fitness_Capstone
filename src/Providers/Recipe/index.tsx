@@ -17,7 +17,13 @@ interface Recipe {
 
 interface RecipeContextData {
   listRecipe: Recipe[];
+  listRecipeFiltered: Recipe[];
   loadRecipe(token: string): void;
+  filterRecipe(category: string): void;
+}
+
+interface FilterProps {
+  category: string;
 }
 
 const RecipeContext = createContext<RecipeContextData>({} as RecipeContextData);
@@ -26,6 +32,7 @@ const useRecipe = () => useContext(RecipeContext);
 
 const RecipeProvider = ({ children }: ChildrenProp) => {
   const [listRecipe, setListRecipe] = useState<Recipe[]>([]);
+  const [listRecipeFiltered, setListRecipeFiltered] = useState<Recipe[]>([]);
 
   const loadRecipe = (token: string) => {
     api
@@ -42,8 +49,21 @@ const RecipeProvider = ({ children }: ChildrenProp) => {
       });
   };
 
+  const filterRecipe = (category: string) => {
+    const result = listRecipe.filter((recipe) => recipe.category === category);
+    //console.log(result);
+    setListRecipeFiltered(result);
+  };
+
   return (
-    <RecipeContext.Provider value={{ listRecipe, loadRecipe }}>
+    <RecipeContext.Provider
+      value={{
+        listRecipe,
+        loadRecipe,
+        filterRecipe,
+        listRecipeFiltered,
+      }}
+    >
       {children}
     </RecipeContext.Provider>
   );

@@ -12,18 +12,30 @@ import {
   ModalFooter,
   Input,
   Text,
+  ListItem,
+  Link,
+  Box,
 } from "@chakra-ui/react";
 import { FiCheck, FiX } from "react-icons/fi";
+
 import { useContext, useState } from "react";
 import { useLogin } from "../Providers/Login";
-import { MuscleContext } from "../Providers/Muscle";
+
 import { useUser } from "../Providers/user";
 
-export const EditPerfil = () => {
+import { useAuth } from "../Providers/AuthContext";
+import { motion } from "framer-motion";
+import { itemLeft } from "../Styles/animate";
+import { AiFillSetting } from "react-icons/ai";
+
+interface OnClose {
+  F: () => void;
+}
+
+export const UpdatePerfil = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { user } = useLogin();
+  const { user, Muscle, weight, height } = useAuth();
   const { AInformation } = useUser();
-  const { Muscle, weight, height } = useContext(MuscleContext);
   const [edit, setEdit] = useState(false);
   const [name, setName] = useState(user.name);
   const [genre, setGenre] = useState(user.genre);
@@ -39,25 +51,63 @@ export const EditPerfil = () => {
     AInformation({ name: name, genre: genre });
   };
 
+  const linkCss = {
+    rounded: 4,
+    overflow: "hidden",
+    boxShadow: "0px 0px 4px 2px rgba(0, 0, 0, 0.35)",
+    bg: "black",
+    w: "full",
+    p: 4,
+    display: "flex",
+    alignItems: "center",
+    gap: 4,
+    fontFamily: "title",
+    position: "relative",
+    "&:hover": {
+      textDecoration: "none",
+    },
+    "&.active:before": {
+      content: "''",
+      width: "5px",
+      borderRadius: "4px",
+      height: "100%",
+      backgroundColor: "third",
+      position: "absolute",
+      top: 0,
+      right: 0,
+    },
+  };
+
   return (
     <>
-      <Button
-        onClick={() => {
-          onOpen();
-          Muscle(user.id);
-        }}
-        background={theme.colors.secondary}
-      >
-        Open Modal
-      </Button>
+      <ListItem as={motion.li} variants={itemLeft}>
+        <Link
+          as={motion.button}
+          sx={linkCss}
+          onClick={() => {
+            onOpen();
+            Muscle(user.id);
+          }}
+        >
+          <Box as="span" fontSize="1.5rem">
+            <AiFillSetting />
+          </Box>
+          <span>SAIR</span>
+        </Link>
+      </ListItem>
 
-      <Modal isOpen={isOpen} onClose={handleCloseClick} size="lg">
+      <Modal
+        isOpen={isOpen}
+        onClose={handleCloseClick}
+        size="lg"
+        blockScrollOnMount={false}
+      >
         <ModalOverlay />
-        <ModalContent background={theme.colors.black}>
+        <ModalContent background="black">
           <ModalHeader
-            fontFamily={theme.fonts.title}
-            color={theme.colors.white}
-            background={theme.colors.primary}
+            fontFamily="title"
+            color="white"
+            background="primary"
             borderTopLeftRadius="8px"
             borderTopRightRadius="8px"
             display="flex"

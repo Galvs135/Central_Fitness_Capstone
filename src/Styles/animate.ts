@@ -18,4 +18,12 @@ const item = {
   },
 };
 
-export { item, container };
+const itemLeft = {
+  hidden: { x: -20, opacity: 0 },
+  visible: {
+    x: 0,
+    opacity: 1,
+  },
+};
+
+export { item, itemLeft, container };

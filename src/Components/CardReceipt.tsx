@@ -1,19 +1,18 @@
 import { Box, Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
 import { useState } from "react";
-import logoTalher from "../Imgs/logoTalher.png";
-import { ModalRevenue } from "./ModalRevenue";
 
-interface RecipeProps {
-  id: number;
-  category: string;
-  title: string;
-  imageURL: string;
-  ingredients: string[];
-  preparation: string[];
-}
+import logoTalher from "../Imgs/talher.png";
+import { ModalRevenue } from "./ModalRecipe";
 
 interface CardProps {
-  data: RecipeProps;
+  data: {
+    id: number;
+    category: string;
+    title: string;
+    imageURL: string;
+    ingredients: string[];
+    preparation: string[];
+  };
 }
 
 export const CardReceipt = (props: CardProps) => {

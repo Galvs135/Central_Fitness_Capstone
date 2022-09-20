@@ -5,6 +5,7 @@ import { Login } from "../Pages/Login";
 import { Nutrition } from "../Pages/Nutrition";
 import { Register } from "../Pages/Register";
 import { Training } from "../Pages/Training";
+
 import { Route } from "./routes";
 
 export const RoutesApplication = () => {

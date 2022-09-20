@@ -8,43 +8,62 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
-  Heading,
-  Flex,
   FormControl,
   FormLabel,
   ModalFooter,
   Input,
   Text,
+  InputGroup,
+  InputRightElement,
 } from "@chakra-ui/react";
-import React, { useContext, useEffect, useState } from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+import React, { useState } from "react";
 import { useAuth } from "../Providers/AuthContext";
-import { api } from "../Services/api";
-import { MuscleContext } from "../Providers/Muscle";
-import { useLogin } from "../Providers/Login";
+
+const signInSchema = yup.object().shape({
+  weight: yup.number().required("Campo Obrigatorio"),
+  height: yup
+    .number()
+    .required("Campo Obrigatorio")
+    .min(1, "Altura Minima atingida")
+    .max(2.5, "Altura maxima atingida"),
+});
+
+interface Calculate {
+  weight: number;
+  height: number;
+}
 
 export const ImcCalculator = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { Muscle, MuscleAtt, MuscleRegister, weight, height } =
-    useContext(MuscleContext);
-  const [weightV, setWeight] = useState(0);
-  const [heightV, setHeight] = useState(0);
+  const { Muscle, MuscleAtt, weight, height } = useAuth();
   const [imc, setImc] = useState<number>(0);
   const { user } = useAuth();
 
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
 
-  useEffect(() => {
-    setHeight(height);
-    setWeight(weight);
-  }, [weight, height]);
+  const {
+    formState: { errors },
+    handleSubmit,
+    register,
+  } = useForm<Calculate>({
+    resolver: yupResolver(signInSchema),
+  });
 
   const handleCloseClick = () => {
     onClose();
   };
 
-  const calculate = () => {
-    setImc(weightV / (heightV * heightV));
+  const calculate = (data: Calculate) => {
+    setImc(data.weight / (data.height * data.height));
+  };
+
+  const Update = (data: Calculate) => {
+    calculate(data);
+    MuscleAtt(user.id, { weight: data.weight, height: data.height });
   };
 
   return (
@@ -76,7 +95,13 @@ export const ImcCalculator = () => {
         size="xs"
       >
         <ModalOverlay />
-        <ModalContent background={theme.colors.black}>
+        <ModalContent
+          background={theme.colors.black}
+          border="3px solid #f6b933"
+          borderTopLeftRadius="13px"
+          borderTopRightRadius="13px"
+          onSubmit={handleSubmit(Update)}
+        >
           <ModalHeader
             fontFamily={theme.fonts.title}
             color={theme.colors.white}
@@ -88,46 +113,40 @@ export const ImcCalculator = () => {
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
-            <FormControl>
-              <FormLabel fontFamily={theme.fonts.title}>Peso</FormLabel>
-              {user ? (
-                <Input
-                  type="number"
-                  step="3"
-                  ref={initialRef}
-                  value={weightV}
-                  onChange={(e) => setWeight(parseFloat(e.target.value))}
-                  background={theme.colors.input}
-                />
-              ) : (
-                <Input
-                  type="number"
-                  ref={initialRef}
-                  onChange={(e) => setWeight(Number(e.target.value))}
-                  background={theme.colors.input}
-                />
-              )}
-            </FormControl>
+            <InputGroup>
+              <FormControl>
+                <FormLabel fontFamily={theme.fonts.title}>Peso</FormLabel>
 
-            <FormControl mt={4}>
-              <FormLabel fontFamily={theme.fonts.title}>Altura</FormLabel>
-              {user ? (
+                <Input
+                  type="string"
+                  step="3"
+                  placeholder={weight.toString()}
+                  background="input"
+                  color="white"
+                  {...register("weight")}
+                />
+                <InputRightElement>
+                  <Text marginBottom="-60px">KG</Text>
+                </InputRightElement>
+              </FormControl>
+            </InputGroup>
+
+            <InputGroup>
+              <FormControl mt={4}>
+                <FormLabel fontFamily={theme.fonts.title}>Altura</FormLabel>
+
                 <Input
                   type="number"
-                  value={heightV}
-                  onChange={(e) => setHeight(Number(e.target.value))}
-                  background={theme.colors.input}
-                  color={theme.colors.white}
+                  placeholder={height.toString()}
+                  background="input"
+                  color="white"
+                  {...register("height")}
                 />
-              ) : (
-                <Input
-                  type="number"
-                  onChange={(e) => setHeight(Number(e.target.value))}
-                  background={theme.colors.input}
-                  color={theme.colors.white}
-                />
-              )}
-            </FormControl>
+                <InputRightElement>
+                  <Text marginBottom="-60px">M</Text>
+                </InputRightElement>
+              </FormControl>
+            </InputGroup>
           </ModalBody>
 
           <ModalFooter>
@@ -136,37 +155,20 @@ export const ImcCalculator = () => {
                 {imc.toFixed(2)}
               </Text>
             )}
-            {weightV === 0 || heightV === 0 ? (
-              <Button
-                borderRadius="20px 20px 120px 20px "
-                background={theme.colors.primary}
-                fontFamily={theme.fonts.title}
-                color={theme.colors.white}
-                mr={3}
-                onClick={() => {
-                  calculate();
-                  MuscleRegister(user.id, { weight: weightV, height: heightV });
-                }}
-              >
-                Calcular
-              </Button>
-            ) : (
-              <Button
-                borderRadius="20px 20px 120px 20px "
-                background={theme.colors.primary}
-                fontFamily={theme.fonts.title}
-                color={theme.colors.white}
-                _hover={{ background: theme.colors.primary }}
-                _active={{ background: theme.colors.primary }}
-                mr={3}
-                onClick={() => {
-                  calculate();
-                  MuscleAtt(user.id, { weight: weightV, height: heightV });
-                }}
-              >
-                Calcular
-              </Button>
-            )}
+
+            <Button
+              borderRadius="20px 20px 120px 20px "
+              background="primary"
+              fontFamily="title"
+              color="white"
+              _hover={{ background: "primary" }}
+              _active={{ background: "primary" }}
+              mr={3}
+              type="submit"
+              onClick={handleSubmit(Update)}
+            >
+              Calcular
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
