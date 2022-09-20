@@ -1,4 +1,4 @@
-import { Box, Button, Container, Flex, Heading, Text } from "@chakra-ui/react";
+import { Button, Container, Flex, Heading, Text } from "@chakra-ui/react";
 import { Link as ReactRouterLink } from "react-router-dom";
 import { useEffect } from "react";
 import ReactPlayer from "react-player";
