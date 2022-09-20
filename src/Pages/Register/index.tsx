@@ -6,7 +6,6 @@ import {
   FormLabel,
   Grid,
   Heading,
-  Image,
   Link,
   Select,
 } from "@chakra-ui/react";
@@ -16,7 +15,6 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import logo_img from "../../Imgs/logo.png";
 import register_img from "../../Imgs/register.png";
 
 import { motion } from "framer-motion";
@@ -71,15 +69,17 @@ export const Register = () => {
       initial="hidden"
       animate="visible"
       pos="relative"
-      minH="100vh"
+      minH="100%"
       bg="#141414"
       bgImage={["none", "none", "none", "none", register_img]}
       bgPosition="0 20vh"
       bgRepeat="no-repeat"
       bgSize="contain"
       overflow="hidden"
+      alignItems="center"
+      display="flex"
     >
-      <Container maxW="container.xl" h="100vh">
+      <Container maxW="container.xl" h="100%">
         <Flex
           w="100%"
           h="100%"
@@ -97,17 +97,7 @@ export const Register = () => {
               "flex-start",
               "flex-start",
             ]}
-          >
-            <Image
-              src={logo_img}
-              alt="Central Fitness"
-              w={["75px", "90px", "85px", "80px"]}
-              maxW="100%"
-              h={["75px", "90px", "85px", "80px"]}
-              as={motion.img}
-              variants={item}
-            />
-          </Box>
+          ></Box>
           <Flex
             w={["100%", "100%", "100%", "100%", "50%"]}
             alignItems="center"
