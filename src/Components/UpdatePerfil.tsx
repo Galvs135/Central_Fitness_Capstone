@@ -31,8 +31,8 @@ export const UpdatePerfil = ({
   const { user } = useAuth();
   const { AInformation, weight, height } = useUser();
   const [edit, setEdit] = useState(false);
-  const [name, setName] = useState(user.name);
-  const [genre, setGenre] = useState(user.genre);
+  const [name, setName] = useState(user?.name);
+  const [genre, setGenre] = useState(user?.genre);
 
   const handleClickEdit = () => {
     setEdit(true);
@@ -76,7 +76,7 @@ export const UpdatePerfil = ({
               fontSize="30px"
               border="3px solid #292929"
             >
-              {user.genre === "masculino" ? "M" : "F"}
+              {user?.genre === "masculino" ? "M" : "F"}
             </Text>
             {edit === true ? (
               <Input
@@ -86,7 +86,7 @@ export const UpdatePerfil = ({
               />
             ) : (
               <Text fontFamily={theme.fonts.title} fontSize="22px">
-                {name.length > 10 ? `${name.slice(0, 9)}...` : name}
+                {name?.length > 10 ? `${name?.slice(0, 9)}...` : name || ""}
               </Text>
             )}
             {edit === true ? (

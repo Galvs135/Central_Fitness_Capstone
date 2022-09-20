@@ -66,7 +66,7 @@ export const DrawerMenu = ({
             textTransform="uppercase"
             fontFamily="title"
           >
-            <motion.span variants={item}>{user?.name.slice(0, 2)}</motion.span>
+            <motion.span variants={item}>{user?.name?.slice(0, 2)}</motion.span>
           </Flex>
         </DrawerHeader>
         <DrawerBody>

@@ -36,8 +36,10 @@ export const Operation = ({
           as={motion.button}
           sx={linkCss}
           onClick={() => {
-            onUpdatePerfilOpen();
             onDrawerMenuClose();
+            setTimeout(() => {
+              onUpdatePerfilOpen();
+            }, 200);
             Muscle(user.id);
           }}
         >
