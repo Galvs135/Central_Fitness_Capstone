@@ -95,6 +95,8 @@ const UserProvider = ({ children }: ChildrenProp) => {
     });
   };
 
+  ///////////
+
   return (
     <UserContext.Provider
       value={{ AInformation, height, Muscle, MuscleAtt, weight }}
