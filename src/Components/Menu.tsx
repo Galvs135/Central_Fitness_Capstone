@@ -152,7 +152,7 @@ export const Menu = () => {
                       </Link>
                     </ListItem>
                     <ListItem as={motion.li} variants={itemLeft}>
-                      <Link as={RouterLink} to="/about" sx={linkCss}>
+                      <Link as={RouterLink} to="/aboutUs" sx={linkCss}>
                         <Box as="span" fontSize="1.5rem">
                           <RiTeamFill />
                         </Box>

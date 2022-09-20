@@ -51,7 +51,7 @@ const AuthProvider = ({ children }: ChildrenProp) => {
         toast({
           position: "top",
           title: "Erro ao tentar atualizar",
-          description: "tente novamente.",
+          description: "tente novamente. ",
           status: "error",
           duration: 3000,
           isClosable: true,

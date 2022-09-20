@@ -17,8 +17,12 @@ import {
   Box,
 } from "@chakra-ui/react";
 import { FiCheck, FiX } from "react-icons/fi";
-import { useState } from "react";
-import { useUser } from "../Providers/User";
+
+import { useContext, useState } from "react";
+import { useLogin } from "../Providers/Login";
+
+import { useUser } from "../Providers/user";
+
 import { useAuth } from "../Providers/AuthContext";
 import { motion } from "framer-motion";
 import { itemLeft } from "../Styles/animate";
@@ -57,6 +61,7 @@ export const UpdatePerfil = () => {
     display: "flex",
     alignItems: "center",
     gap: 4,
+
     fontFamily: "title",
     position: "relative",
     "&:hover": {
@@ -193,10 +198,10 @@ export const UpdatePerfil = () => {
 
           <ModalFooter display="flex" justifyContent="space-around">
             <Text fontFamily={theme.fonts.title} fontSize="18px">
-              {weight}
+              {`${weight} KG`}
             </Text>
             <Text fontFamily={theme.fonts.title} fontSize="18px">
-              {height}
+              {`${height} M`}
             </Text>
           </ModalFooter>
         </ModalContent>
