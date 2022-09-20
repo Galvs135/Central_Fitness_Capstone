@@ -5,7 +5,6 @@ import {
   ReactNode,
   useState,
   useCallback,
-  useEffect,
 } from "react";
 import { useHistory } from "react-router-dom";
 import { api } from "../Services/api";
@@ -89,13 +88,6 @@ const AuthProvider = ({ children }: ChildrenProp) => {
 
   const [listTrainigs, setListTrainings] = useState<Training[]>([]);
 
-  useEffect(() => {
-    if (data.accessToken && data.user) {
-      getUser();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   const signIn = useCallback(async ({ email, password }: SignInCredentials) => {
     api
       .post("/signin", { email, password })
@@ -141,7 +133,6 @@ const AuthProvider = ({ children }: ChildrenProp) => {
           localStorage.setItem(
             "@Fitness:user",
             JSON.stringify({
-              ...data,
               user: { ...data.user, name: name, genre: genre },
             })
           );
@@ -229,7 +220,6 @@ const AuthProvider = ({ children }: ChildrenProp) => {
             (training: Training) =>
               training.genre.toLowerCase() === data.user.genre.toLowerCase()
           );
-
           setListTrainings(filteredByGenre);
         })
         .catch(({ response }) => {
