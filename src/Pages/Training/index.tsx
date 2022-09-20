@@ -1,5 +1,4 @@
-
-import { Flex, Image, InputGroup, Input } from "@chakra-ui/react";
+import { Box, InputGroup, Input, Grid, Container } from "@chakra-ui/react";
 
 import { CardTraining } from "../../Components/CardTraining";
 import TrainingImage from "../../Imgs/training.png";
@@ -18,7 +17,6 @@ interface TrainingProps {
 }
 
 export const Training = () => {
-
   const { accessToken, user, loadTraining, listTrainigs } = useAuth();
   const [trainingFind, setTrainingFind] = useState<TrainingProps[]>(
     [] as TrainingProps[]

@@ -17,7 +17,7 @@ import { FiCheck, FiX } from "react-icons/fi";
 import { useState } from "react";
 
 import { useAuth } from "../Providers/AuthContext";
-import { useUser } from "../Providers/user";
+import { useUser } from "../Providers/User";
 
 interface UpdatePerfilProps {
   isUpdatePerfilOpen: boolean;
@@ -40,7 +40,6 @@ export const UpdatePerfil = ({
   const Actualization = () => {
     AInformation({ name: name, genre: genre });
   };
-
 
   return (
     <>
