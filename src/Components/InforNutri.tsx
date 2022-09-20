@@ -18,8 +18,8 @@ export const InforNutrition = () => {
   return (
     <Flex
       w="100%"
-      pt="95px"
       alignItems="center"
+      mb="92px"
       justifyContent={["center", "center", "center", "space-between"]}
     >
       <Box w={["100%", "100%", "100%", "65%"]} pl={["18px", "32px", "112px"]}>
