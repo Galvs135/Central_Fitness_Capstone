@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Image, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { useHistory } from "react-router-dom";
 
@@ -26,7 +26,7 @@ export const CardTraining = ({ training }: CardTrainingProps) => {
     if (category === "abdomen") {
       return AbdomenImg;
     }
-    if (category === "pernas") {
+    if (category === "perna") {
       return LegImg;
     }
     if (category === "peito") {
