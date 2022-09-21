@@ -62,8 +62,8 @@ export const UpdatePerfil = ({
             borderTopLeftRadius="8px"
             borderTopRightRadius="8px"
             display="flex"
-            flexDirection="row"
-            alignItems="flex-end"
+            flexDirection={["column", "column", "row", "row"]}
+            alignItems={["center", "center", "flex-end", "flex-end"]}
             justifyContent="space-around"
             flexWrap="nowrap"
           >
@@ -82,7 +82,7 @@ export const UpdatePerfil = ({
             ) : (
               <Text
                 background="white"
-                padding=" 30px 40px "
+                padding=" 30px 47px "
                 marginBottom="-50px"
                 borderRadius="50% 50%"
                 color="black"
@@ -112,6 +112,8 @@ export const UpdatePerfil = ({
                   }}
                   background="primary"
                   color="black"
+                  _hover={{ background: "secondary" }}
+                  _active={{ background: "secondary" }}
                 >
                   <FiCheck />
                 </Button>
@@ -119,6 +121,8 @@ export const UpdatePerfil = ({
                   onClick={() => setEdit(false)}
                   background="primary"
                   color="black"
+                  _hover={{ background: "secondary" }}
+                  _active={{ background: "secondary" }}
                 >
                   <FiX />
                 </Button>
@@ -129,6 +133,8 @@ export const UpdatePerfil = ({
                 background="primary"
                 color="black"
                 width="111px"
+                _hover={{ background: "secondary" }}
+                _active={{ background: "secondary" }}
               >
                 <AiOutlineEdit />
               </Button>
@@ -138,14 +144,30 @@ export const UpdatePerfil = ({
           <ModalBody pb={6} display="flex" justifyContent="center">
             {edit === true ? (
               <Select
-                placeholder="selecione o sexo"
+                defaultValue={genre}
                 onChange={(e) => setGenre(e.target.value)}
                 width="200px"
                 _hover={{ background: "black" }}
                 _active={{ background: "black" }}
               >
-                <option value="masculino">Masculino</option>
-                <option value="feminino">Feminino</option>
+                <option
+                  value="masculino"
+                  style={{
+                    color: "#ffffff",
+                    backgroundColor: "#292929",
+                  }}
+                >
+                  Masculino
+                </option>
+                <option
+                  value="feminino"
+                  style={{
+                    color: "#ffffff",
+                    backgroundColor: "#292929",
+                  }}
+                >
+                  Feminino
+                </option>
               </Select>
             ) : (
               <Text fontFamily="title" fontSize="22px">

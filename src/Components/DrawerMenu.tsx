@@ -38,7 +38,7 @@ export const DrawerMenu = ({
       placement="left"
       onClose={onDrawerMenuClose}
       isOpen={isDrawerMenuOpen}
-      size={["full", "full", "full", "xs"]}
+      size={["full", "full", "full", "full", "xs"]}
     >
       <DrawerOverlay />
       <DrawerContent

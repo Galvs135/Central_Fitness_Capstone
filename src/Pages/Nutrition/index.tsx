@@ -124,7 +124,7 @@ export const Nutrition = () => {
         >
           {listRecipeFiltered.length > 0 ? (
             <Grid
-              justifyContent="center"
+              justifyItems="center"
               templateColumns={[
                 " repeat(1, 1fr)",
                 "repeat(2, 1fr)",
