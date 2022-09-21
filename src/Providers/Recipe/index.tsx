@@ -1,6 +1,5 @@
 import { createContext, useContext, ReactNode, useState } from "react";
 import { api } from "../../Services/api";
-import { useAuth } from "../AuthContext";
 
 interface ChildrenProp {
   children: ReactNode;
@@ -20,10 +19,6 @@ interface RecipeContextData {
   listRecipeFiltered: Recipe[];
   loadRecipe(token: string): void;
   filterRecipe(category: string): void;
-}
-
-interface FilterProps {
-  category: string;
 }
 
 const RecipeContext = createContext<RecipeContextData>({} as RecipeContextData);

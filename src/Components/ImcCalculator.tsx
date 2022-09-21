@@ -61,6 +61,7 @@ export const ImcCalculator = () => {
   const Update = (data: Calculate) => {
     calculate(data);
     MuscleAtt(user.id, { weight: data.weight, height: data.height });
+    Muscle(user?.id);
   };
 
   return (
