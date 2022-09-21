@@ -79,9 +79,9 @@ export const DrawerMenu = ({
               initial="hidden"
               animate="visible"
             >
-              <ItemMenu title="FITNESS" path="/fitnessHome" />
-              <ItemMenu title="TREINOS" path="/training" />
-              <ItemMenu title="SOBRE NOS" path="/aboutus" />
+              <ItemMenu title="FITNESS" path="/fitnessHome" icon="home" />
+              <ItemMenu title="TREINOS" path="/training" icon="training" />
+              <ItemMenu title="SOBRE NOS" path="/aboutus" icon="team" />
               <ItemMenu title="NUTRIÇÃO" path="/nutrition" />
             </List>
           </Flex>
