@@ -121,50 +121,50 @@ const AuthProvider = ({ children }: ChildrenProp) => {
   }, []);
 
   const getUser = useCallback(async () => {
-    if (data.accessToken) {
-      api
-        .get(`users/${data.user.id}`, {
-          headers: {
-            Authorization: `Bearer ${data.accessToken}`,
-          },
-        })
-        .then((response) => {
-          const { genre, name } = response.data;
-          localStorage.setItem(
-            "@Fitness:user",
-            JSON.stringify({
-              user: { ...data.user, name: name, genre: genre },
-            })
-          );
-          setData({
-            ...data,
+    // if (data.accessToken) {
+    api
+      .get(`users/${data.user.id}`, {
+        headers: {
+          Authorization: `Bearer ${data.accessToken}`,
+        },
+      })
+      .then((response) => {
+        const { genre, name } = response.data;
+        localStorage.setItem(
+          "@Fitness:user",
+          JSON.stringify({
             user: { ...data.user, name: name, genre: genre },
-          });
-        })
-        .catch(({ response }) => {
-          if (response.status === 401) {
-            logOut();
-            toast({
-              position: "top",
-              title: "Sua sessão expirou",
-              description: "Por favor, faça o login novamente",
-              status: "warning",
-              duration: 2000,
-              isClosable: true,
-            });
-          } else {
-            toast({
-              position: "top",
-              title: "Ocorreu um error",
-              description:
-                "Erro desconhecido por favor tente novamente mais tarde",
-              status: "error",
-              duration: 2000,
-              isClosable: true,
-            });
-          }
+          })
+        );
+        setData({
+          ...data,
+          user: { ...data.user, name: name, genre: genre },
         });
-    }
+      })
+      .catch(({ response }) => {
+        if (response.status === 401) {
+          logOut();
+          toast({
+            position: "top",
+            title: "Sua sessão expirou",
+            description: "Por favor, faça o login novamente",
+            status: "warning",
+            duration: 2000,
+            isClosable: true,
+          });
+        } else {
+          toast({
+            position: "top",
+            title: "Ocorreu um error",
+            description:
+              "Erro desconhecido por favor tente novamente mais tarde",
+            status: "error",
+            duration: 2000,
+            isClosable: true,
+          });
+        }
+      });
+    // }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
