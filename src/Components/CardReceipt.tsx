@@ -1,4 +1,4 @@
-import { Box, Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
+import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import { useState } from "react";
 
 import logoTalher from "../Imgs/talher.png";
@@ -16,8 +16,6 @@ interface CardProps {
 }
 
 export const CardReceipt = (props: CardProps) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
   const [open, setOpen] = useState(false);
 
   const openModal = () => {

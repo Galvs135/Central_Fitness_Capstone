@@ -46,6 +46,7 @@ export const Training = () => {
         bgPos="bottom right"
         bgRepeat="no-repeat"
         bgSize="50%"
+        pt={2}
       >
         <Container maxW="container.xl" px={4}>
           <InputGroup maxW="450px" mx="auto" mb={[2]}>

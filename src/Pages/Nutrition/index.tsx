@@ -35,7 +35,7 @@ export const Nutrition = () => {
           justifyContent="space-between"
           flexDirection={["column", "column", "row", "row"]}
           alignItems={["center", "center", "flex-end"]}
-          w={["100%", "100%", "100%", "90%", "80%"]}
+          w={["100%", "100%", "100%", "90%", "90%"]}
           m="0 auto"
         >
           <Box
@@ -100,7 +100,7 @@ export const Nutrition = () => {
           >
             Receitas para o emagrecimento
           </Heading>
-          <Flex w={["332px", "352px", "408px"]}>
+          <Flex w={["332px", "352px", "458px"]}>
             <Box>
               <Image src={timerLogo} w={["18px", "18px", "44px"]} />
             </Box>

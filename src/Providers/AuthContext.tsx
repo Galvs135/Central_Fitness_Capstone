@@ -121,131 +121,127 @@ const AuthProvider = ({ children }: ChildrenProp) => {
   }, []);
 
   const getUser = useCallback(async () => {
-    if (data.accessToken) {
-      api
-        .get(`users/${data.user.id}`, {
-          headers: {
-            Authorization: `Bearer ${data.accessToken}`,
-          },
-        })
-        .then((response) => {
-          const { genre, name } = response.data;
-          localStorage.setItem(
-            "@Fitness:user",
-            JSON.stringify({
-              user: { ...data.user, name: name, genre: genre },
-            })
-          );
-          setData({
-            ...data,
+    // if (data.accessToken) {
+    api
+      .get(`users/${data.user.id}`, {
+        headers: {
+          Authorization: `Bearer ${data.accessToken}`,
+        },
+      })
+      .then((response) => {
+        const { genre, name } = response.data;
+        localStorage.setItem(
+          "@Fitness:user",
+          JSON.stringify({
             user: { ...data.user, name: name, genre: genre },
-          });
-        })
-        .catch(({ response }) => {
-          if (response.status === 401) {
-            logOut();
-            toast({
-              position: "top",
-              title: "Sua sessão expirou",
-              description: "Por favor, faça o login novamente",
-              status: "warning",
-              duration: 2000,
-              isClosable: true,
-            });
-          } else {
-            toast({
-              position: "top",
-              title: "Ocorreu um error",
-              description:
-                "Erro desconhecido por favor tente novamente mais tarde",
-              status: "error",
-              duration: 2000,
-              isClosable: true,
-            });
-          }
+          })
+        );
+        setData({
+          ...data,
+          user: { ...data.user, name: name, genre: genre },
         });
-    }
+      })
+      .catch(({ response }) => {
+        if (response.status === 401) {
+          logOut();
+          toast({
+            position: "top",
+            title: "Sua sessão expirou",
+            description: "Por favor, faça o login novamente",
+            status: "warning",
+            duration: 2000,
+            isClosable: true,
+          });
+        } else {
+          toast({
+            position: "top",
+            title: "Ocorreu um error",
+            description:
+              "Erro desconhecido por favor tente novamente mais tarde",
+            status: "error",
+            duration: 2000,
+            isClosable: true,
+          });
+        }
+      });
+    // }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const singUp = (dataSing: SingUpCredentials) => {
-    if (data.accessToken) {
-      api
-        .post("/register", dataSing)
-        .then(({ data }) => {
-          toast({
-            position: "top",
-            title: "Conta criada.",
-            description: "sua conta foi criada com sucesso, faça o login.",
-            status: "success",
-            duration: 3000,
-            isClosable: true,
-          });
-          api.post(
-            `/muscles`,
-            { weight: 0, height: 0, userId: data.user.id },
-            {
-              headers: {
-                Authorization: `Bearer ${data.accessToken}`,
-              },
-            }
-          );
-          history.push("/");
-        })
-        .catch((_) => {
-          toast({
-            position: "top",
-            title: "Error ao criar conta, tente novamente.",
-            description: "Tente um email diferente.",
-            status: "error",
-            duration: 3000,
-            isClosable: true,
-          });
+    api
+      .post("/register", dataSing)
+      .then(({ data }) => {
+        toast({
+          position: "top",
+          title: "Conta criada.",
+          description: "sua conta foi criada com sucesso, faça o login.",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
         });
-    }
+        api.post(
+          `/muscles`,
+          { weight: 0, height: 0, userId: data.user.id },
+          {
+            headers: {
+              Authorization: `Bearer ${data.accessToken}`,
+            },
+          }
+        );
+        history.push("/");
+      })
+      .catch((_) => {
+        toast({
+          position: "top",
+          title: "Error ao criar conta, tente novamente.",
+          description: "Tente um email diferente.",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      });
   };
 
   const loadTraining = () => {
-    if (data.accessToken) {
-      api
-        .get("/training", {
-          headers: {
-            Authorization: `Bearer ${data.accessToken}`,
-          },
-        })
-        .then((response) => {
-          const list = response.data;
-          const filteredByGenre = list.filter(
-            (training: Training) =>
-              training.genre.toLowerCase() === data.user.genre.toLowerCase()
-          );
-          setListTrainings(filteredByGenre);
-        })
-        .catch(({ response }) => {
-          if (response.status === 401) {
-            logOut();
-            toast({
-              position: "top",
-              title: "Sua sessão expirou",
-              description: "Por favor, faça o login novamente",
-              status: "warning",
-              duration: 2000,
-              isClosable: true,
-            });
-          } else {
-            toast({
-              position: "top",
-              title: "Ocorreu um error",
-              description:
-                "Erro desconhecido por favor tente novamente mais tarde",
-              status: "error",
-              duration: 2000,
-              isClosable: true,
-            });
-          }
-        });
-    }
+    api
+      .get("/training", {
+        headers: {
+          Authorization: `Bearer ${data.accessToken}`,
+        },
+      })
+      .then((response) => {
+        const list = response.data;
+        const filteredByGenre = list.filter(
+          (training: Training) =>
+            training.genre.toLowerCase() === data.user.genre.toLowerCase()
+        );
+        setListTrainings(filteredByGenre);
+      })
+      .catch(({ response }) => {
+        if (response.status === 401) {
+          logOut();
+          toast({
+            position: "top",
+            title: "Sua sessão expirou",
+            description: "Por favor, faça o login novamente",
+            status: "warning",
+            duration: 2000,
+            isClosable: true,
+          });
+        } else {
+          toast({
+            position: "top",
+            title: "Ocorreu um error",
+            description:
+              "Erro desconhecido por favor tente novamente mais tarde",
+            status: "error",
+            duration: 2000,
+            isClosable: true,
+          });
+        }
+      });
   };
 
   const logOut = () => {
