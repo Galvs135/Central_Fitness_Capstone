@@ -1,3 +1,4 @@
+import { InforNutrition } from "../../Components/InforNutri";
 import {
   Box,
   Button,
@@ -24,131 +25,137 @@ export const Nutrition = () => {
     if (accessToken) {
       loadRecipe(accessToken);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log("teste");
   return (
-    <Flex flexDirection="column" w="100vw">
-      <Flex
-        w={["100vh", "100%"]}
-        //bg="red"
-        justifyContent="space-around"
-        flexDirection={["column", "column", "row", "row"]}
-        alignItems="center"
-      >
-        <Box
-          w={["100%", "500px", "30%"]}
-          //bg="blue"
-          display="flex"
-          flexDirection="column"
-        >
-          <Text fontSize="xl">Receitas para:</Text>
-          <ButtonGroup
-            display="flex"
-            flexDirection={["row", "row", "column"]}
-            alignItems="flex-start"
-            colorScheme="none"
-          >
-            <Button
-              _hover={{ borderBottom: `solid 3px ${theme.colors.primary}` }}
-              _focus={{ borderBottom: `solid 3px ${theme.colors.primary}` }}
-              margin="5px"
-              padding="8px"
-              onClick={() => filterRecipe("")}
-            >
-              Todas as refeições
-            </Button>
-            <Button
-              _hover={{ borderBottom: `solid 3px ${theme.colors.primary}` }}
-              _focus={{ borderBottom: `solid 3px ${theme.colors.primary}` }}
-              margin="5px"
-              padding="8px"
-              onClick={() => filterRecipe("Café da manhã")}
-            >
-              Café da manhã
-            </Button>
-            <Button
-              _hover={{ borderBottom: `solid 3px ${theme.colors.primary}` }}
-              _focus={{ borderBottom: `solid 3px ${theme.colors.primary}` }}
-              margin="5px"
-              padding="8px"
-              onClick={() => filterRecipe("Almoço")}
-            >
-              Almoço
-            </Button>
-            <Button
-              _hover={{ borderBottom: `solid 3px ${theme.colors.primary}` }}
-              _focus={{ borderBottom: `solid 3px ${theme.colors.primary}` }}
-              margin="5px"
-              padding="8px"
-              onClick={() => filterRecipe("Lanche")}
-            >
-              Lanche
-            </Button>
-          </ButtonGroup>
-        </Box>
+    <Box w={["100vw", "100vw", "100%"]}>
+      <InforNutrition />
+      <Flex flexDirection="column" w="100%">
         <Flex
-          direction={["row", "row", "column", "row"]}
-          justifyContent={["space-around"]}
+          justifyContent="space-between"
+          flexDirection={["column", "column", "row", "row"]}
+          alignItems={["center", "center", "flex-end"]}
+          w={["100%", "100%", "100%", "90%", "90%"]}
+          m="0 auto"
         >
-          <Box w="400px" ml="0px" pl="0px">
-            <Heading color={theme.colors.primary}>
-              Receitas para o emagrecimento
-            </Heading>
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            pl="24px"
+          >
+            <Text fontSize="xl" w="100%" textAlign="start">
+              Receitas para:
+            </Text>
+            <ButtonGroup
+              display="flex"
+              flexDirection={["row", "row", "column"]}
+              alignItems="flex-start"
+              colorScheme="none"
+              flexWrap="wrap"
+              w={["322px", "100%"]}
+            >
+              <Button
+                _hover={{ borderBottom: `solid 3px ${theme.colors.primary}` }}
+                _focus={{ borderBottom: `solid 3px ${theme.colors.primary}` }}
+                fontSize={["12px", "12px", "16px", "16px"]}
+                onClick={() => filterRecipe("")}
+              >
+                Todas as refeições
+              </Button>
+              <Button
+                _hover={{ borderBottom: `solid 3px ${theme.colors.primary}` }}
+                _focus={{ borderBottom: `solid 3px ${theme.colors.primary}` }}
+                fontSize={["12px", "12px", "16px", "16px"]}
+                onClick={() => filterRecipe("Café da manhã")}
+              >
+                Café da manhã
+              </Button>
+              <Button
+                _hover={{ borderBottom: `solid 3px ${theme.colors.primary}` }}
+                _focus={{ borderBottom: `solid 3px ${theme.colors.primary}` }}
+                fontSize={["12px", "12px", "16px", "16px"]}
+                onClick={() => filterRecipe("Almoço")}
+              >
+                Almoço
+              </Button>
+              <Button
+                _hover={{ borderBottom: `solid 3px ${theme.colors.primary}` }}
+                _focus={{ borderBottom: `solid 3px ${theme.colors.primary}` }}
+                fontSize={["12px", "12px", "16px", "16px"]}
+                onClick={() => filterRecipe("Lanche")}
+              >
+                Lanche
+              </Button>
+            </ButtonGroup>
           </Box>
-          <Flex>
+          <Heading
+            padding="18px"
+            color={theme.colors.primary}
+            fontSize={["18px", "20px", "24px", "34px", "42px"]}
+            textAlign="center"
+            maxW="400px"
+            w="100%"
+            mt={["5", "5", "0"]}
+          >
+            Receitas para o emagrecimento
+          </Heading>
+          <Flex w={["332px", "352px", "458px"]}>
             <Box>
-              <Image src={timerLogo} />
+              <Image src={timerLogo} w={["18px", "18px", "44px"]} />
             </Box>
             <Flex ml="20px" w="250px" flexDirection="column" marginRight="30px">
-              <Text mb="15px" fontSize="15">
+              <Text mb="15px" fontSize={["10px", "10px", "14px"]}>
                 Lembre-se de realizar sua refeição de 25 a 30 minutos no minimo
                 para ajudar na digestão antes de se exercitar
               </Text>
-              <Text fontSize="15">
+              <Text fontSize={["10px", "10px", "14px"]}>
                 Diminua o consumo de gordura, aumente o consumo de fibras e
                 carboidratos para te dar a disposição no momento de treinar.
               </Text>
             </Flex>
           </Flex>
         </Flex>
+        <Flex
+          alignItems="center"
+          justifyContent="center"
+          m="64px auto"
+          w={["50%", "50%", "50%", "70%", "80%"]}
+        >
+          {listRecipeFiltered.length > 0 ? (
+            <Grid
+              justifyItems="center"
+              templateColumns={[
+                " repeat(1, 1fr)",
+                "repeat(2, 1fr)",
+                "repeat(3, 1fr)",
+                "repeat(4, 1fr)",
+              ]}
+              gap={6}
+            >
+              {listRecipeFiltered.map((recipe) => {
+                return <CardReceipt key={recipe.id} data={recipe} />;
+              })}
+            </Grid>
+          ) : (
+            <Grid
+              w="100%"
+              justifyContent="center"
+              templateColumns={[
+                " repeat(1, 1fr)",
+                "repeat(2, 1fr)",
+                "repeat(3, 1fr)",
+                "repeat(4, 1fr)",
+              ]}
+              gap={6}
+            >
+              {listRecipe.map((recipe) => {
+                return <CardReceipt key={recipe.id} data={recipe} />;
+              })}
+            </Grid>
+          )}
+        </Flex>
       </Flex>
-      <Flex
-        alignItems="center"
-        justifyContent="center"
-        marginTop="100px"
-        //margin="auto"
-        //bg="blue"
-        w="100vh"
-      >
-        {listRecipeFiltered.length > 0 ? (
-          <Grid
-            justifyContent="center"
-            templateColumns="repeat(2, 1fr) repeat(4, 1fr)"
-            gap={6}
-          >
-            {listRecipeFiltered.map((recipe) => {
-              return <CardReceipt key={recipe.id} data={recipe} />;
-            })}
-          </Grid>
-        ) : (
-          <Grid
-            w="100%"
-            templateColumns={[
-              " repeat(2, 1fr)",
-              "repeat(2, 1fr)",
-              "repeat(3, 1fr)",
-              "repeat(4, 1fr)",
-            ]}
-            gap={6}
-          >
-            {listRecipe.map((recipe) => {
-              return <CardReceipt key={recipe.id} data={recipe} />;
-            })}
-          </Grid>
-        )}
-      </Flex>
-    </Flex>
+    </Box>
   );
 };
