@@ -11,6 +11,7 @@ import {
   ModalFooter,
   Input,
   Text,
+  Select,
 } from "@chakra-ui/react";
 import { FiCheck, FiX } from "react-icons/fi";
 
@@ -67,17 +68,31 @@ export const UpdatePerfil = ({
             justifyContent="space-around"
             flexWrap="nowrap"
           >
-            <Text
-              background={theme.colors.white}
-              padding=" 30px 40px "
-              marginBottom="-50px"
-              borderRadius="50% 50%"
-              color={theme.colors.black}
-              fontSize="30px"
-              border="3px solid #292929"
-            >
-              {user?.genre === "masculino" ? "M" : "F"}
-            </Text>
+            {genre === "masculino" ? (
+              <Text
+                background="white"
+                padding=" 30px 40px "
+                marginBottom="-50px"
+                borderRadius="50% 50%"
+                color="black"
+                fontSize="30px"
+                border="3px solid #292929"
+              >
+                M
+              </Text>
+            ) : (
+              <Text
+                background="white"
+                padding=" 30px 40px "
+                marginBottom="-50px"
+                borderRadius="50% 50%"
+                color="black"
+                fontSize="30px"
+                border="3px solid #f6b933"
+              >
+                F
+              </Text>
+            )}
             {edit === true ? (
               <Input
                 value={name}
@@ -85,23 +100,26 @@ export const UpdatePerfil = ({
                 width="200px"
               />
             ) : (
-              <Text fontFamily={theme.fonts.title} fontSize="22px">
+              <Text fontFamily="title" fontSize="22px">
                 {name?.length > 10 ? `${name?.slice(0, 9)}...` : name || ""}
               </Text>
             )}
             {edit === true ? (
               <>
                 <Button
-                  onClick={() => Actualization()}
-                  background={theme.colors.primary}
-                  color={theme.colors.black}
+                  onClick={() => {
+                    Actualization();
+                    setEdit(false);
+                  }}
+                  background="primary"
+                  color="black"
                 >
                   <FiCheck />
                 </Button>
                 <Button
                   onClick={() => setEdit(false)}
-                  background={theme.colors.primary}
-                  color={theme.colors.black}
+                  background="primary"
+                  color="black"
                 >
                   <FiX />
                 </Button>
@@ -109,8 +127,8 @@ export const UpdatePerfil = ({
             ) : (
               <Button
                 onClick={() => handleClickEdit()}
-                background={theme.colors.primary}
-                color={theme.colors.black}
+                background="primary"
+                color="black"
                 width="111px"
               >
                 <AiOutlineEdit />
@@ -120,23 +138,28 @@ export const UpdatePerfil = ({
           <ModalCloseButton fontSize="15px" />
           <ModalBody pb={6} display="flex" justifyContent="center">
             {edit === true ? (
-              <Input
-                value={genre}
+              <Select
+                placeholder="selecione o sexo"
                 onChange={(e) => setGenre(e.target.value)}
                 width="200px"
-              />
+                _hover={{ background: "black" }}
+                _active={{ background: "black" }}
+              >
+                <option value="masculino">Masculino</option>
+                <option value="feminino">Feminino</option>
+              </Select>
             ) : (
-              <Text fontFamily={theme.fonts.title} fontSize="22px">
-                {genre}
+              <Text fontFamily="title" fontSize="22px">
+                {user?.genre}
               </Text>
             )}
           </ModalBody>
 
           <ModalFooter display="flex" justifyContent="space-around">
-            <Text fontFamily={theme.fonts.title} fontSize="18px">
+            <Text fontFamily="title" fontSize="18px">
               {`${weight} KG`}
             </Text>
-            <Text fontFamily={theme.fonts.title} fontSize="18px">
+            <Text fontFamily="title" fontSize="18px">
               {`${height} M`}
             </Text>
           </ModalFooter>
