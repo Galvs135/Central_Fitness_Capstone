@@ -22,17 +22,17 @@ export const InforNutrition = () => {
       mb="92px"
       justifyContent={["center", "center", "center", "space-between"]}
     >
-      <Box w={["100%", "100%", "100%", "65%"]} pl={["18px", "32px", "112px"]}>
+      <Box w={["100%", "100%", "100%", "65%"]} pl={["12px", "12px", "112px"]}>
         <Heading
           color={theme.colors.secondary}
           fontSize={["16px", "24px", "28px", "35px"]}
-          w={["100%", "100%", "65%", "75%", "75%"]}
+          w={["308px", "422px", "65%", "75%", "75%"]}
         >
           DESEJA COMEÇAR UMA DIETA SAUDÁVEL ?
         </Heading>
         <Text
           fontSize={["14px", "16px", "18px", "22px", "22px"]}
-          w={["322px", "322px", "522px", "522px"]}
+          w={["302px", "322px", "522px", "522px"]}
           mt="20px"
         >
           Encontre a receita ideal para você preparar do seu próprio lar.
@@ -45,7 +45,7 @@ export const InforNutrition = () => {
             <Text
               ml="4"
               fontSize={["12px", "16px", "16px", "16px", "20px"]}
-              w={["322px", "332px", "392px", "492px"]}
+              w={["302px", "332px", "392px", "492px"]}
             >
               É sempre importante se hidratar antes, durante e depois dos
               exércicios.
