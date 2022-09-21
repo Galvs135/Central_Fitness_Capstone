@@ -5,13 +5,12 @@ import {
   Flex,
   Grid,
   Heading,
-  Image,
   Text,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { container, item } from "../../Styles/animate";
 import login_img from "../../Imgs/imageLogin.png";
-import logo_img from "../../Imgs/logo.png";
+
 import { useHistory } from "react-router-dom";
 import { Input } from "../../Components/Input";
 import * as yup from "yup";
@@ -56,33 +55,30 @@ export const Login = () => {
       initial="hidden"
       animate="visible"
       pos="relative"
-      minH="100vh"
+      minH="100%"
       bg="#141414"
       bgImage={["none", "none", "none", login_img, login_img]}
       bgPosition="right bottom"
       bgRepeat="no-repeat"
-      bgSize="85vh"
+      bgSize="75vh"
       overflow="hidden"
+      display="flex"
+      alignItems="center"
     >
-      <Container maxW="container.xl" h="100vh">
+      <Container
+        maxW="container.xl"
+        alignItems="center"
+        h="100%"
+        display="flex"
+      >
         <Flex
           w="100%"
           h="100%"
           py={[4, 6, 8, 8, 8]}
           flexDir={["column", "column", "column", "row", "row"]}
           gap={[6, 6, 6, 6, 8]}
+          alignItems="center"
         >
-          <Image
-            src={logo_img}
-            alt="Central Fitness"
-            w={["75px", "90px", "85px", "80px"]}
-            maxW="100%"
-            h={["75px", "90px", "85px", "80px"]}
-            as={motion.img}
-            variants={item}
-            alignSelf={["center", "center", "center", "flex-start"]}
-            mb={["40px", "40px", "40px", "0", "0"]}
-          />
           <Flex
             w={["100%", "100%", "100%", "100%", "50%"]}
             alignItems="center"
