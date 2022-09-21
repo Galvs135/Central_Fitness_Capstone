@@ -8,14 +8,6 @@
     "description": "Após descobrir a programação através de um anúncio no facebook e conhecer a área do frontend e me identificar com ela, eu decidi seguir este caminho de desenvolvedor. Hoje quando olho para trás e tenho a certeza que foi a escolha certa e observar o quanto eu evolui tanto em questões técnicas quanto em relações interpessoais, me motiva sempre continuar aprendendo e entregar o melhor de mim. "
   },
   {
-    "avatar": "/imgs/lucas.jpg",
-    "name": "Lucas Galvão",
-    "role": "Tech Leader",
-    "linkedIn": "https://www.linkedin.com/in/galvs135/",
-    "gitHub": "https://github.com/Galvs135",
-    "description": "Minha relação com a tecnologia começou na minha adolescência quando participei de um evento gratuito da escola SAGA relacionado a um curso de desenvolvimento que estavam lançando na época. Meu objetivo é trabalhar em projetos que possam me acrescentar novas habilidades, visando meu crescimento profissional."
-  },
-  {
     "avatar": "/imgs/allan.jpg",
     "name": "Allan Alves",
     "role": "Scrum Master",
@@ -23,6 +15,15 @@
     "gitHub": "https://github.com/allanalvescs",
     "description": "Antes de me formar no ensino médio, não tinha certeza em qual área eu iria seguir, foi quando eu descobri as oportunidades que o mundo da programação poderia trazer para minha vida, decidi iniciar os estudos na área. Comecei estudando as tecnologias base pelo Youtube (HTML,CSS), a partir daí, minha paixão na área de tecnologia era o mundo do Front-end."
   },
+  {
+    "avatar": "/imgs/lucas.jpg",
+    "name": "Lucas Galvão",
+    "role": "Tech Leader",
+    "linkedIn": "https://www.linkedin.com/in/galvs135/",
+    "gitHub": "https://github.com/Galvs135",
+    "description": "Minha relação com a tecnologia começou na minha adolescência quando participei de um evento gratuito da escola SAGA relacionado a um curso de desenvolvimento que estavam lançando na época. Meu objetivo é trabalhar em projetos que possam me acrescentar novas habilidades, visando meu crescimento profissional."
+  },
+
   {
     "avatar": "/imgs/claudio.jpg",
     "name": "Claudio Inácio",
