@@ -1,4 +1,3 @@
-import { theme } from "../Styles/theme";
 import { AiOutlineEdit } from "react-icons/ai";
 import {
   Button,

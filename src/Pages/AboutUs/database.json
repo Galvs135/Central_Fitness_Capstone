@@ -16,11 +16,35 @@
     "description": "Minha relação com a tecnologia começou na minha adolescência quando participei de um evento gratuito da escola SAGA relacionado a um curso de desenvolvimento que estavam lançando na época. Meu objetivo é trabalhar em projetos que possam me acrescentar novas habilidades, visando meu crescimento profissional."
   },
   {
-    "avatar": "/imgs/lucas.jpg",
-    "name": "Lucas Galvão",
-    "role": "Tech Leader",
-    "linkedIn": "https://www.linkedin.com/in/galvs135/",
-    "gitHub": "https://github.com/Galvs135",
-    "description": "Minha relação com a tecnologia começou na minha adolescência quando participei de um evento gratuito da escola SAGA relacionado a um curso de desenvolvimento que estavam lançando na época. Meu objetivo é trabalhar em projetos que possam me acrescentar novas habilidades, visando meu crescimento profissional."
+    "avatar": "/imgs/allan.jpg",
+    "name": "Allan Alves",
+    "role": "Scrum Master",
+    "linkedIn": "https://www.linkedin.com/in/allan-alves-19b64a1b5/",
+    "gitHub": "https://github.com/allanalvescs",
+    "description": "Antes de me formar no ensino médio, não tinha certeza em qual área eu iria seguir, foi quando eu descobri as oportunidades que o mundo da programação poderia trazer para minha vida, decidi iniciar os estudos na área. Comecei estudando as tecnologias base pelo Youtube (HTML,CSS), a partir daí, minha paixão na área de tecnologia era o mundo do Front-end."
+  },
+  {
+    "avatar": "/imgs/claudio.jpg",
+    "name": "Claudio Inácio",
+    "role": "Quality Assurance",
+    "linkedIn": "https://www.linkedin.com/in/claudio-in%C3%A1cio-felipe-junior/",
+    "gitHub": "https://github.com/claudio-inacio",
+    "description": "Trabalho na área de tecnologia como Implantador de Sistemas.. Porém tenho o sonho de me tornar desenvolvedor, escolhi essa profissão pois pude perceber que sempre estamos solucionando problemas e melhorando a vida das pessoas através da tecnologia e isso é mais do que satisfatório."
+  },
+  {
+    "avatar": "/imgs/barbara.jpg",
+    "name": "Bárbara Souza",
+    "role": "Quality Assurance",
+    "linkedIn": "#",
+    "gitHub": "https://github.com/ibarbarasouza",
+    "description": "..."
+  },
+  {
+    "avatar": "/imgs/wallace.png",
+    "name": "Wallace Júnior",
+    "role": "Quality Assurance",
+    "linkedIn": "#",
+    "gitHub": "https://github.com/wallacejuniorwv",
+    "description": "..."
   }
 ]
