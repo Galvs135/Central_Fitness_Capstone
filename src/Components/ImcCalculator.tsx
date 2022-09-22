@@ -15,13 +15,16 @@ import {
   Text,
   InputGroup,
   InputRightElement,
+  Flex,
+  Box,
 } from "@chakra-ui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../Providers/AuthContext";
 import { useUser } from "../Providers/User";
+import { ImcStatus } from "./ImcStatus";
 
 const signInSchema = yup.object().shape({
   weight: yup.number().required("Campo Obrigatório"),
@@ -37,11 +40,16 @@ interface Calculate {
   height: number;
 }
 
+interface Status {
+  imc: number;
+}
+
 export const ImcCalculator = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { Muscle, MuscleAtt, weight, height } = useUser();
   const [imc, setImc] = useState<number>(0);
   const { user } = useAuth();
+  const [situation, setSituation] = useState<string>("" as string);
 
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
@@ -55,8 +63,28 @@ export const ImcCalculator = () => {
   };
 
   const calculate = (data: Calculate) => {
-    setImc(data.weight / (data.height * data.height));
+    if (data) {
+      setImc(data.weight / (data.height * data.height));
+    } else {
+      setImc(weight / (height * height));
+    }
   };
+
+  useEffect(() => {
+    if (imc < 18.5) {
+      setSituation("Abaixo do peso");
+    } else if (24.9 > imc && imc > 18.5) {
+      setSituation("Peso Normal");
+    } else if (29.9 > imc && imc > 25) {
+      setSituation("Excesso de peso");
+    } else if (imc > 30) {
+      setSituation("Obesidade");
+    } else {
+      setSituation("Obesidade Extrema");
+    }
+  }, [imc]);
+
+  console.log(situation);
 
   const Update = (data: Calculate) => {
     calculate(data);
@@ -148,25 +176,30 @@ export const ImcCalculator = () => {
           </ModalBody>
 
           <ModalFooter>
-            {imc !== 0 && (
-              <Text fontFamily={theme.fonts.title} fontSize="30px" mr={12}>
-                {imc.toFixed(2)}
-              </Text>
-            )}
+            <Flex flexDirection="column" alignItems="center" gap={4}>
+              <Box display="flex">
+                {imc !== 0 && (
+                  <Text fontFamily={theme.fonts.title} fontSize="30px" mr={12}>
+                    {`${imc.toFixed(2)} %`}
+                  </Text>
+                )}
 
-            <Button
-              borderRadius="20px 20px 120px 20px "
-              background="primary"
-              fontFamily="title"
-              color="white"
-              _hover={{ background: "primary" }}
-              _active={{ background: "primary" }}
-              mr={3}
-              type="submit"
-              onClick={handleSubmit(Update)}
-            >
-              Calcular
-            </Button>
+                <Button
+                  borderRadius="20px 20px 120px 20px "
+                  background="primary"
+                  fontFamily="title"
+                  color="white"
+                  _hover={{ background: "primary" }}
+                  _active={{ background: "primary" }}
+                  mr={3}
+                  type="submit"
+                  onClick={handleSubmit(Update)}
+                >
+                  Calcular
+                </Button>
+              </Box>
+              <ImcStatus status={situation} />
+            </Flex>
           </ModalFooter>
         </ModalContent>
       </Modal>

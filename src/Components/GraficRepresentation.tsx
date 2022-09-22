@@ -1,5 +1,5 @@
 import { Box, Center, Flex, Heading, Text } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../Providers/AuthContext";
 import { useUser } from "../Providers/User";
 import { theme } from "../Styles/theme";
@@ -7,10 +7,22 @@ import { theme } from "../Styles/theme";
 export const GraficRepresentation = () => {
   const { weight, height, Muscle } = useUser();
   const { user } = useAuth();
+  const [color, setColor] = useState<string>("" as string);
 
   useEffect(() => {
     Muscle(user?.id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    let imc = weight / (height * height);
+    if (imc < 18.5) {
+      setColor("08a6bbdd");
+    } else if (24.9 > imc && imc > 18.5) {
+      setColor("2cbb08dd");
+    } else if (29.9 > imc && imc > 25) {
+      setColor("e7d20fdd");
+    } else if (imc > 30) {
+      setColor("bb6708dd");
+    } else {
+      setColor("bb1d08dd");
+    }
   }, [weight, height]);
 
   return (
@@ -87,7 +99,7 @@ export const GraficRepresentation = () => {
           w={["55px", "55px", "70px"]}
           h={["55px", "55px", "70px"]}
           borderRadius="100%"
-          borderColor={theme.colors.primary}
+          borderColor={`#${color}`}
         >
           <Text color="white" fontSize="12px">
             {(weight / (height * height)).toFixed(2)}%
