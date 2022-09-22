@@ -15,13 +15,16 @@ import {
   Text,
   InputGroup,
   InputRightElement,
+  Flex,
+  Box,
 } from "@chakra-ui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../Providers/AuthContext";
 import { useUser } from "../Providers/User";
+import { ImcStatus } from "./ImcStatus";
 
 const signInSchema = yup.object().shape({
   weight: yup.number().required("Campo Obrigatório"),
@@ -37,11 +40,15 @@ interface Calculate {
   height: number;
 }
 
+interface Status {
+  imc: number;
+}
+
 export const ImcCalculator = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { Muscle, MuscleAtt, weight, height } = useUser();
-  const [imc, setImc] = useState<number>(0);
+  const { Muscle, MuscleAtt, weight, height, imc, CalculateImc } = useUser();
   const { user } = useAuth();
+  const [situation, setSituation] = useState<string>("" as string);
 
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
@@ -54,12 +61,22 @@ export const ImcCalculator = () => {
     onClose();
   };
 
-  const calculate = (data: Calculate) => {
-    setImc(data.weight / (data.height * data.height));
-  };
+  useEffect(() => {
+    if (imc < 18.5) {
+      setSituation("Abaixo do peso");
+    } else if (24.9 > imc && imc > 18.5) {
+      setSituation("Peso Normal");
+    } else if (29.9 > imc && imc > 25) {
+      setSituation("Excesso de peso");
+    } else if (imc > 30 && imc < 35) {
+      setSituation("Obesidade");
+    } else {
+      setSituation("Obesidade Extrema");
+    }
+  }, [imc]);
 
   const Update = (data: Calculate) => {
-    calculate(data);
+    CalculateImc(data);
     MuscleAtt(user.id, { weight: data.weight, height: data.height });
     Muscle(user?.id);
   };
@@ -78,6 +95,7 @@ export const ImcCalculator = () => {
         color="#fff"
         fontSize="16px"
         fontWeight="semibold"
+        textShadow="2px 1px black"
         borderRadius="5px 5px 120px 5px"
         boxShadow="4px 4px 4px 0px #333"
         _hover={{ bg: "yellow.400" }}
@@ -106,6 +124,7 @@ export const ImcCalculator = () => {
             background={theme.colors.primary}
             borderTopLeftRadius="8px"
             borderTopRightRadius="8px"
+            textShadow="2px 1px black"
           >
             Calcular IMC
           </ModalHeader>
@@ -148,25 +167,31 @@ export const ImcCalculator = () => {
           </ModalBody>
 
           <ModalFooter>
-            {imc !== 0 && (
-              <Text fontFamily={theme.fonts.title} fontSize="30px" mr={12}>
-                {imc.toFixed(2)}
-              </Text>
-            )}
+            <Flex flexDirection="column" alignItems="center" gap={4}>
+              <Box display="flex">
+                {imc !== 0 && (
+                  <Text fontFamily={theme.fonts.title} fontSize="30px" mr={12}>
+                    {`${imc.toFixed(2)} %`}
+                  </Text>
+                )}
 
-            <Button
-              borderRadius="20px 20px 120px 20px "
-              background="primary"
-              fontFamily="title"
-              color="white"
-              _hover={{ background: "primary" }}
-              _active={{ background: "primary" }}
-              mr={3}
-              type="submit"
-              onClick={handleSubmit(Update)}
-            >
-              Calcular
-            </Button>
+                <Button
+                  borderRadius="20px 20px 120px 20px "
+                  background="primary"
+                  fontFamily="title"
+                  color="white"
+                  _hover={{ background: "primary" }}
+                  _active={{ background: "primary" }}
+                  mr={3}
+                  type="submit"
+                  onClick={handleSubmit(Update)}
+                  textShadow="2px 1px black"
+                >
+                  Calcular
+                </Button>
+              </Box>
+              <ImcStatus status={situation} />
+            </Flex>
           </ModalFooter>
         </ModalContent>
       </Modal>
