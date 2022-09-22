@@ -62,13 +62,19 @@ export const UpdatePerfil = ({
             borderTopLeftRadius="8px"
             borderTopRightRadius="8px"
             display="flex"
-            flexDirection={["column", "column", "row", "row"]}
+            flexDirection="row"
             alignItems={["center", "center", "flex-end", "flex-end"]}
-            justifyContent="space-around"
+            justifyContent={[
+              "center",
+              "center",
+              "space-around",
+              "space-around",
+            ]}
             flexWrap="nowrap"
           >
             {genre === "masculino" ? (
               <Text
+                display={["none", "none", "block", "block"]}
                 background="white"
                 padding=" 30px 40px "
                 marginBottom="-50px"
@@ -81,6 +87,7 @@ export const UpdatePerfil = ({
               </Text>
             ) : (
               <Text
+                display={["none", "none", "block", "block"]}
                 background="white"
                 padding=" 30px 47px "
                 marginBottom="-50px"
@@ -106,6 +113,7 @@ export const UpdatePerfil = ({
             {edit === true ? (
               <>
                 <Button
+                  display={["none", "none", "block", "block"]}
                   onClick={() => {
                     Actualization();
                     setEdit(false);
@@ -118,6 +126,7 @@ export const UpdatePerfil = ({
                   <FiCheck />
                 </Button>
                 <Button
+                  display={["none", "none", "block", "block"]}
                   onClick={() => setEdit(false)}
                   background="primary"
                   color="black"
@@ -129,6 +138,7 @@ export const UpdatePerfil = ({
               </>
             ) : (
               <Button
+                display={["none", "none", "block", "block"]}
                 onClick={() => handleClickEdit()}
                 background="primary"
                 color="black"
@@ -173,6 +183,51 @@ export const UpdatePerfil = ({
               <Text fontFamily="title" fontSize="22px">
                 {user?.genre}
               </Text>
+            )}
+            {edit === true ? (
+              <>
+                <Button
+                  display={["block", "block", "none", "none"]}
+                  onClick={() => {
+                    Actualization();
+                    setEdit(false);
+                  }}
+                  background="primary"
+                  color="black"
+                  position="absolute"
+                  top="16%"
+                  left="85%"
+                  _hover={{ background: "secondary" }}
+                  _active={{ background: "secondary" }}
+                >
+                  <FiCheck />
+                </Button>
+                <Button
+                  display={["block", "block", "none", "none"]}
+                  onClick={() => setEdit(false)}
+                  background="black"
+                  color="primary"
+                  position="absolute"
+                  left="85%"
+                  _hover={{ background: "secondary" }}
+                  _active={{ background: "secondary" }}
+                >
+                  <FiX />
+                </Button>
+              </>
+            ) : (
+              <Button
+                display={["block", "block", "none", "none"]}
+                onClick={() => handleClickEdit()}
+                background="black"
+                color="primary"
+                position="absolute"
+                left="80%"
+                _hover={{ background: "secondary" }}
+                _active={{ background: "secondary" }}
+              >
+                <AiOutlineEdit />
+              </Button>
             )}
           </ModalBody>
 
