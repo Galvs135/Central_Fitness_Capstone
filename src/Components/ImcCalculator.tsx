@@ -95,6 +95,7 @@ export const ImcCalculator = () => {
         color="#fff"
         fontSize="16px"
         fontWeight="semibold"
+        textShadow="2px 1px black"
         borderRadius="5px 5px 120px 5px"
         boxShadow="4px 4px 4px 0px #333"
         _hover={{ bg: "yellow.400" }}
@@ -123,6 +124,7 @@ export const ImcCalculator = () => {
             background={theme.colors.primary}
             borderTopLeftRadius="8px"
             borderTopRightRadius="8px"
+            textShadow="2px 1px black"
           >
             Calcular IMC
           </ModalHeader>
@@ -183,6 +185,7 @@ export const ImcCalculator = () => {
                   mr={3}
                   type="submit"
                   onClick={handleSubmit(Update)}
+                  textShadow="2px 1px black"
                 >
                   Calcular
                 </Button>
