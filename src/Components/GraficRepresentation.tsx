@@ -5,7 +5,7 @@ import { useUser } from "../Providers/User";
 import { theme } from "../Styles/theme";
 
 export const GraficRepresentation = () => {
-  const { weight, height, Muscle, imc, CalculateImc } = useUser();
+  const { weight, height, Muscle, imc } = useUser();
   const { user } = useAuth();
   const [color, setColor] = useState<string>("" as string);
 

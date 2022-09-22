@@ -19,7 +19,7 @@ export const ImcStatus = ({ status }: Status) => {
         display="flex"
         justifyContent="space-between"
       >
-        {status == "Abaixo do peso" ? (
+        {status === "Abaixo do peso" ? (
           <Input
             w="5%"
             h="5%"
@@ -29,7 +29,7 @@ export const ImcStatus = ({ status }: Status) => {
         ) : (
           <Input w="5%" h="5%" bgColor="#08a6bbdd" disabled />
         )}
-        {status == "Peso Normal" ? (
+        {status === "Peso Normal" ? (
           <Input
             w="5%"
             h="5%"
@@ -39,7 +39,7 @@ export const ImcStatus = ({ status }: Status) => {
         ) : (
           <Input w="5%" h="5%" bgColor="#2cbb08dd" disabled />
         )}
-        {status == "Excesso de peso" ? (
+        {status === "Excesso de peso" ? (
           <Input
             w="5%"
             h="5%"
@@ -49,7 +49,7 @@ export const ImcStatus = ({ status }: Status) => {
         ) : (
           <Input w="5%" h="5%" bgColor="#e7d20fdd" disabled />
         )}
-        {status == "Obesidade" ? (
+        {status === "Obesidade" ? (
           <Input
             w="5%"
             h="5%"
@@ -59,7 +59,7 @@ export const ImcStatus = ({ status }: Status) => {
         ) : (
           <Input w="5%" h="5%" bgColor="#bb6708dd" disabled />
         )}
-        {status == "Obesidade Extrema" ? (
+        {status === "Obesidade Extrema" ? (
           <Input
             w="5%"
             h="5%"

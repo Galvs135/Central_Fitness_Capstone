@@ -40,10 +40,6 @@ interface Calculate {
   height: number;
 }
 
-interface Status {
-  imc: number;
-}
-
 export const ImcCalculator = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { Muscle, MuscleAtt, weight, height, imc, CalculateImc } = useUser();
