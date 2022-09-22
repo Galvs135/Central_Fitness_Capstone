@@ -75,7 +75,7 @@ export const ImcCalculator = () => {
         bg="#F6CB33"
         w={["152px", "152px", "252px"]}
         h={["45px", "45px", "65px"]}
-        color="#000000"
+        color="#fff"
         fontSize="16px"
         fontWeight="semibold"
         borderRadius="5px 5px 120px 5px"
@@ -102,7 +102,7 @@ export const ImcCalculator = () => {
         >
           <ModalHeader
             fontFamily={theme.fonts.title}
-            color={theme.colors.black}
+            color={theme.colors.white}
             background={theme.colors.primary}
             borderTopLeftRadius="8px"
             borderTopRightRadius="8px"
@@ -158,7 +158,7 @@ export const ImcCalculator = () => {
               borderRadius="20px 20px 120px 20px "
               background="primary"
               fontFamily="title"
-              color="black"
+              color="white"
               _hover={{ background: "primary" }}
               _active={{ background: "primary" }}
               mr={3}
