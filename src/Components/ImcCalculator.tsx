@@ -46,8 +46,7 @@ interface Status {
 
 export const ImcCalculator = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { Muscle, MuscleAtt, weight, height } = useUser();
-  const [imc, setImc] = useState<number>(0);
+  const { Muscle, MuscleAtt, weight, height, imc, CalculateImc } = useUser();
   const { user } = useAuth();
   const [situation, setSituation] = useState<string>("" as string);
 
@@ -62,14 +61,6 @@ export const ImcCalculator = () => {
     onClose();
   };
 
-  const calculate = (data: Calculate) => {
-    if (data) {
-      setImc(data.weight / (data.height * data.height));
-    } else {
-      setImc(weight / (height * height));
-    }
-  };
-
   useEffect(() => {
     if (imc < 18.5) {
       setSituation("Abaixo do peso");
@@ -77,17 +68,15 @@ export const ImcCalculator = () => {
       setSituation("Peso Normal");
     } else if (29.9 > imc && imc > 25) {
       setSituation("Excesso de peso");
-    } else if (imc > 30) {
+    } else if (imc > 30 && imc < 35) {
       setSituation("Obesidade");
     } else {
       setSituation("Obesidade Extrema");
     }
   }, [imc]);
 
-  console.log(situation);
-
   const Update = (data: Calculate) => {
-    calculate(data);
+    CalculateImc(data);
     MuscleAtt(user.id, { weight: data.weight, height: data.height });
     Muscle(user?.id);
   };

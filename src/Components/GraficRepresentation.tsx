@@ -5,25 +5,24 @@ import { useUser } from "../Providers/User";
 import { theme } from "../Styles/theme";
 
 export const GraficRepresentation = () => {
-  const { weight, height, Muscle } = useUser();
+  const { weight, height, Muscle, imc, CalculateImc } = useUser();
   const { user } = useAuth();
   const [color, setColor] = useState<string>("" as string);
 
   useEffect(() => {
     Muscle(user?.id);
-    let imc = weight / (height * height);
     if (imc < 18.5) {
       setColor("08a6bbdd");
     } else if (24.9 > imc && imc > 18.5) {
       setColor("2cbb08dd");
     } else if (29.9 > imc && imc > 25) {
       setColor("e7d20fdd");
-    } else if (imc > 30) {
+    } else if (imc > 30 && imc < 35) {
       setColor("bb6708dd");
     } else {
       setColor("bb1d08dd");
     }
-  }, [weight, height]);
+  }, [imc]);
 
   return (
     <Box

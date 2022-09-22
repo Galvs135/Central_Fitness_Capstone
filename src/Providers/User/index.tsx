@@ -1,13 +1,21 @@
 import { useToast } from "@chakra-ui/react";
-import { createContext, useContext, ReactNode, useState } from "react";
+import {
+  createContext,
+  useContext,
+  ReactNode,
+  useState,
+  useEffect,
+} from "react";
 import { api } from "../../Services/api";
 import { useAuth } from "../AuthContext";
 
 interface ContextProps {
   AInformation: (data: Actualization) => void;
   MuscleAtt: (id: string, data: Muscledata) => void;
+  CalculateImc: (data: Calculate) => void;
   weight: number;
   height: number;
+  imc: number;
   Muscle: (id: string) => void;
 }
 
@@ -21,6 +29,11 @@ interface Actualization {
 }
 
 interface Muscledata {
+  weight: number;
+  height: number;
+}
+
+interface Calculate {
   weight: number;
   height: number;
 }
@@ -40,6 +53,11 @@ const UserProvider = ({ children }: ChildrenProp) => {
   const [height, setHeight] = useState<number>(0);
   const toast = useToast();
   const { user, accessToken, getUser } = useAuth();
+  const [imc, setImc] = useState<number>(0);
+
+  useEffect(() => {
+    setImc(weight / (height * height));
+  }, [weight, height]);
 
   const AInformation = (data: Actualization) => {
     api
@@ -95,11 +113,25 @@ const UserProvider = ({ children }: ChildrenProp) => {
     });
   };
 
-  ///////////
+  const CalculateImc = (data: Calculate) => {
+    if (data) {
+      setImc(data.weight / (data.height * data.height));
+    } else {
+      setImc(weight / (height * height));
+    }
+  };
 
   return (
     <UserContext.Provider
-      value={{ AInformation, height, Muscle, MuscleAtt, weight }}
+      value={{
+        AInformation,
+        height,
+        Muscle,
+        MuscleAtt,
+        weight,
+        CalculateImc,
+        imc,
+      }}
     >
       {children}
     </UserContext.Provider>
