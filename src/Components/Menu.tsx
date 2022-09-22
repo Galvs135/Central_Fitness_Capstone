@@ -50,7 +50,7 @@ export const Menu = () => {
         alignContent="center"
       >
         <Container
-          maxW={["100%", "100%", "80%"]}
+          maxW="container.xl"
           display="flex"
           alignItems="center"
           justifyContent="space-between"
@@ -71,11 +71,19 @@ export const Menu = () => {
               >
                 <CgMenuGridO />
               </Button>
-              <Image src={logo_img} alt="logo" w="45px" />
+              <Image
+                src={logo_img}
+                alt="logo"
+                w={["40px", "40px", "40px", "64px"]}
+              />
             </>
           ) : (
             <Flex w="100%" justifyContent={["center", "center", "flex-start"]}>
-              <Image src={logo_img} alt="logo" w="55px" />
+              <Image
+                src={logo_img}
+                alt="logo"
+                w={["55px", "55px", "55px", "64px"]}
+              />
             </Flex>
           )}
         </Container>

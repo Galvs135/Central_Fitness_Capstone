@@ -46,7 +46,6 @@ const RecipeProvider = ({ children }: ChildrenProp) => {
 
   const filterRecipe = (category: string) => {
     const result = listRecipe.filter((recipe) => recipe.category === category);
-    //console.log(result);
     setListRecipeFiltered(result);
   };
 

@@ -48,6 +48,9 @@ export const CardTraining = ({ training }: CardTrainingProps) => {
   return (
     <Box
       as={motion.div}
+      initial={{ scale: 0, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      exit={{ opacity: 0, scale: 0 }}
       layout
       cursor="pointer"
       onClick={() => goToExercise(training.title)}

@@ -1,10 +1,9 @@
 import { Box, InputGroup, Input, Grid, Container } from "@chakra-ui/react";
-
 import { CardTraining } from "../../Components/CardTraining";
 import TrainingImage from "../../Imgs/training.png";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../Providers/AuthContext";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { FaSearch } from "react-icons/fa";
 
 interface TrainingProps {
@@ -83,6 +82,7 @@ export const Training = () => {
         <Grid
           px={4}
           as={motion.div}
+          layout
           gridTemplateColumns={[
             "repeat(1,1fr)",
             "repeat(3,1fr)",
@@ -109,13 +109,15 @@ export const Training = () => {
             },
           }}
         >
-          {trainingFind.length > 0
-            ? trainingFind.map((training) => (
-                <CardTraining key={training.id} training={training} />
-              ))
-            : listTrainigs.map((training) => (
-                <CardTraining key={training?.id} training={training} />
-              ))}
+          <AnimatePresence>
+            {trainingFind.length > 0
+              ? trainingFind.map((training) => (
+                  <CardTraining key={training.id} training={training} />
+                ))
+              : listTrainigs.map((training) => (
+                  <CardTraining key={training?.id} training={training} />
+                ))}
+          </AnimatePresence>
         </Grid>
       </Grid>
     </>
