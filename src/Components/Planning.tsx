@@ -82,6 +82,7 @@ export const Planning = () => {
                   variant="h1"
                   size={["xs", "xs", "md", "md"]}
                   fontFamily="title"
+                  color={"black"}
                   letterSpacing={1}
                   w="100%"
                   display={["inline", "inline", "none", "none"]}
@@ -119,6 +120,7 @@ export const Planning = () => {
                   />
                   <Text
                     fontFamily="text"
+                    color={"black"}
                     fontSize={["14px", "14px", "14px", "20px"]}
                   >
                     Defina de 15 á 30 minutos do seu dia para se exercitar
@@ -132,6 +134,7 @@ export const Planning = () => {
                   />
                   <Text
                     fontFamily="text"
+                    color={"black"}
                     fontSize={["14px", "14px", "14px", "20px"]}
                   >
                     Planeje refeições saborosas e saudáveis
@@ -145,6 +148,7 @@ export const Planning = () => {
                   />
                   <Text
                     fontFamily="text"
+                    color={"black"}
                     fontSize={["14px", "14px", "14px", "20px"]}
                   >
                     Seja conduzido na comunidade fitness.
