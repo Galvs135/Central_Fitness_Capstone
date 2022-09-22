@@ -1,10 +1,13 @@
 import { HeroFitness } from "../../Components/HeroFitness";
+import { Planning } from "../../Components/Planning";
+import { SoftwareInfo } from "../../Components/SoftwareInfo";
 
 export const FitnessHome = () => {
-  // Pagina criada para renderizar componente nas rotas
   return (
     <>
       <HeroFitness />
+      <SoftwareInfo />
+      <Planning />
     </>
   );
 };
