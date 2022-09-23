@@ -7,21 +7,25 @@ import { theme } from "../Styles/theme";
 export const GraficRepresentation = () => {
   const { weight, height, Muscle, imc } = useUser();
   const { user } = useAuth();
-  const [color, setColor] = useState<string>("" as string);
+  const [color, setColor] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
 
   useEffect(() => {
     Muscle(user?.id);
     if (imc < 18.5) {
       setColor("08a6bbdd");
+      setCategory("Abaixo do peso");
     } else if (24.9 > imc && imc > 18.5) {
       setColor("2cbb08dd");
+      setCategory("Peso Normal");
     } else if (29.9 > imc && imc > 25) {
       setColor("e7d20fdd");
-    } else if (imc > 30 && imc < 35) {
+      setCategory("Excesso de peso");
+    } else if (imc > 30) {
       setColor("bb6708dd");
-    } else {
-      setColor("bb1d08dd");
+      setCategory("Obesidade");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imc]);
 
   return (
@@ -51,7 +55,7 @@ export const GraficRepresentation = () => {
               Categoria:
             </Heading>
             <Text fontSize={["12px", "12px", "14px"]} color="white" ml="2">
-              Normal
+              {category}
             </Text>
           </Flex>
           <Flex alignItems="center" w="135px">
@@ -86,8 +90,13 @@ export const GraficRepresentation = () => {
             >
               Sexo:
             </Heading>
-            <Text fontSize={["12px", "12px", "14px"]} color="white" ml="2">
-              Feminino
+            <Text
+              fontSize={["12px", "12px", "14px"]}
+              color="white"
+              ml="2"
+              textTransform="capitalize"
+            >
+              {user?.genre || ""}
             </Text>
           </Flex>
         </Box>

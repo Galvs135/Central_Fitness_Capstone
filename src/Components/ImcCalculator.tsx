@@ -64,10 +64,8 @@ export const ImcCalculator = () => {
       setSituation("Peso Normal");
     } else if (29.9 > imc && imc > 25) {
       setSituation("Excesso de peso");
-    } else if (imc > 30 && imc < 35) {
+    } else if (imc > 30) {
       setSituation("Obesidade");
-    } else {
-      setSituation("Obesidade Extrema");
     }
   }, [imc]);
 
